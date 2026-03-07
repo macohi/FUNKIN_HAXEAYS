@@ -1,0 +1,14 @@
+{
+	"search.exclude": {
+		"export/**/*.*": true
+	},
+
+	"lime.buildTypes": [
+		{
+			"label": "Indev",
+			"args": ["-DIndev"],
+			"enabled": true,
+		}
+	],
+	"lime.defaultTargetConfiguration": "Windows / Indev",
+}
