@@ -6,7 +6,7 @@ class InitState extends FlxState {
 	override function create() {
 		super.create();
 
-		FlxSprite.defaultAntialiasing = false;
+		FlxSprite.defaultAntialiasing = true;
 
 		Conductor.instance = new Conductor();
 
