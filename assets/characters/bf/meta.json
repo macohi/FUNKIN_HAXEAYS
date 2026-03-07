@@ -1,4 +1,31 @@
 {
     "type": "sparrow",
-    "imageName": "atlas"
+    "imageName": "atlas",
+    "animations": [
+        {
+            "name": "idle",
+            "type": "prefix",
+            "prefix": "bf anim idle"
+        },
+        {
+            "name": "left",
+            "type": "prefix",
+            "prefix": "bf anim left"
+        },
+        {
+            "name": "down",
+            "type": "prefix",
+            "prefix": "bf anim down"
+        },
+        {
+            "name": "up",
+            "type": "prefix",
+            "prefix": "bf anim up"
+        },
+        {
+            "name": "right",
+            "type": "prefix",
+            "prefix": "bf anim right"
+        }
+    ]
 }
