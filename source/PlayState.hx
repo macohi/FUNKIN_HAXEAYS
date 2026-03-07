@@ -1,9 +1,9 @@
 package;
 
+import ui.MusicBeatState;
 import objects.Character;
-import flixel.FlxState;
 
-class PlayState extends FlxState
+class PlayState extends MusicBeatState
 {
 	public static var instance:PlayState;
 
@@ -24,5 +24,12 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+	}
+
+	override function beatHit(beat:Int)
+	{
+		super.beatHit(beat);
+
+		player.dance();
 	}
 }
