@@ -1,14 +1,16 @@
 package objects;
 
+import data.objects.ObjectAnimationType;
+import data.objects.ObjectTagData;
+import animate.FlxAnimateFrames;
 import scripting.BaseScript;
 import scripting.CharacterScript;
 import sys.FileSystem;
 import debugging.DebugLogger;
-import data.ObjectAnimationType;
 import flixel.graphics.frames.FlxAtlasFrames;
 import lime.utils.Assets;
 import haxe.Json;
-import data.CharacterMetadata;
+import data.characters.*;
 import objects.AYSSprite;
 
 class Character extends AYSSprite {
@@ -27,6 +29,8 @@ class Character extends AYSSprite {
 
 		this.id = id;
 
+		scriptHolder = new ScriptHolder();
+
 		if (!Assets.exists(getPath('meta${Constants.EXT_CHARACTER_META}'))) {
 			DebugLogger.error('Character ${this.id} is missing their metadata file');
 			return;
@@ -42,7 +46,6 @@ class Character extends AYSSprite {
 		if (metadata != null)
 			loadCharacter();
 
-		scriptHolder = new ScriptHolder();
 		trace('Reading script folder for character: ${this.id}');
 		try {
 			final scriptsFolder:Array<String> = FileSystem.readDirectory(getPath('scripts'));
@@ -81,7 +84,7 @@ class Character extends AYSSprite {
 		scriptHolder.scriptCall(method, args);
 
 	public function scriptSet(variable:String, value:Dynamic)
-		scriptHolder.scriptCall(variable, value);
+		scriptHolder.scriptSet(variable, value);
 
 	public function scriptGet(variable:String):Dynamic
 		return scriptHolder.scriptGet(variable);
@@ -92,6 +95,9 @@ class Character extends AYSSprite {
 		switch (metadata.type) {
 			case sparrow:
 				loadSparrowCharacter();
+
+			case textureatlas:
+				loadTextureAtlasCharacter();
 
 			default:
 				DebugLogger.error('Character "${this.id}" has an unknown type: ${metadata.type}');
@@ -125,7 +131,57 @@ class Character extends AYSSprite {
 		}
 	}
 
+	public function loadTextureAtlasCharacter() {
+		final imageName = metadata.imageName ?? 'atlas';
+
+		this.frames = FlxAnimateFrames.fromAnimate(getPath('$imageName'));
+
+		if (metadata.animations == null) {
+			DebugLogger.error('Character "${this.id}" is missing the metadata "animations" field.');
+			return;
+		}
+
+		for (anim in metadata.animations) {
+			if (anim.name == null)
+				continue;
+
+			if (![ObjectAnimationType.framelabel].contains(anim.type)) {
+				trace(' * Unsupported animation (${anim.name}) OAT: ${anim.type}');
+				continue;
+			}
+
+			trace(' * Adding ${anim.type} animation: ${anim.name}');
+			if (anim.type == framelabel)
+				addFrameLabel(anim.name, anim.framelabel, anim.fps ?? 24, anim.looped ?? false);
+		}
+	}
+
+	public function getTag(tagName:String):ObjectTagData {
+		for (tag in metadata.tags ?? [])
+			if (tag.name == tagName)
+				return tag;
+
+		return null;
+	}
+
+	public var danced:Bool = false;
+
 	public function dance() {
+		danced = !danced;
+
+		scriptSet('o', false);
+		scriptCall('dance');
+
+		// override
+		if (scriptGet('o') != null && scriptGet('o') == true)
+			return;
+
+		if (getTag('danceIdle') != null) {
+			playAnim('dance' + ((danced) ? 'Left' : 'Right'));
+
+			return;
+		}
+
 		playAnim('idle');
 	}
 }

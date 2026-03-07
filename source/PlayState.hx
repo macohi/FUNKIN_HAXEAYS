@@ -29,29 +29,39 @@ class PlayState extends MusicBeatState {
 		if (song.player != null) {
 			player = new Character(song.player);
 			add(player);
-			player.setPosition(770, 100);
+
+			player.screenCenter();
+			player.x += player.width;
 		}
 
 		if (song.damsel != null) {
 			damsel = new Character(song.damsel);
 			add(damsel);
-			damsel.setPosition(400, 130);
+
+			damsel.screenCenter();
+			damsel.y -= 100;
 		}
 
 		if (song.opponent != null) {
 			opponent = new Character(song.opponent);
 			add(opponent);
 
-			opponent.setPosition(100, 100);
+			opponent.screenCenter();
+			opponent.x -= opponent.width;
 		}
 
-		scriptCall('onSongStart');
+		conductor.bpm = song.startingBPM;
 		song.playAudio();
+
+		scriptCall('onSongStart');
 	}
 
 	public function scriptCall(m:String, ?a:Array<Dynamic>) {
 		song.scriptCall(m, a);
+
 		player.scriptCall(m, a);
+		damsel.scriptCall(m, a);
+		opponent.scriptCall(m, a);
 	}
 
 	override public function update(elapsed:Float) {
@@ -64,6 +74,16 @@ class PlayState extends MusicBeatState {
 	override function beatHit(beat:Int) {
 		super.beatHit(beat);
 
+		scriptCall('beatHit', [beat]);
+
 		player.dance();
+		damsel.dance();
+		opponent.dance();
+	}
+
+	override function stepHit(step:Int) {
+		super.stepHit(step);
+
+		scriptCall('stepHit', [step]);
 	}
 }

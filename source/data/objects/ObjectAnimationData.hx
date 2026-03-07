@@ -1,6 +1,4 @@
-package data;
-
-import data.ObjectAnimationType;
+package data.objects;
 
 typedef ObjectAnimationData = {
 	name:String,
@@ -8,6 +6,9 @@ typedef ObjectAnimationData = {
 
 	/** prefix **/
 	?prefix:String,
+
+	/** framelabel **/
+	?framelabel:String,
 
 	/** general **/
 	?fps:Int,

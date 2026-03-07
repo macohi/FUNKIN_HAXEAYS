@@ -1,0 +1,21 @@
+{
+    "type": "textureatlas",
+    "imageName": "atlas",
+    "animations": [
+        {
+            "name": "danceLeft",
+            "type": "framelabel",
+            "framelabel": "danceLeft"
+        },
+        {
+            "name": "danceRight",
+            "type": "framelabel",
+            "framelabel": "danceRight"
+        }
+    ],
+    "tags": [
+        {
+            "name": "danceIdle"
+        }
+    ]
+}

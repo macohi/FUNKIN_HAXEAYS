@@ -18,6 +18,8 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
+	<haxelib name="flixel-animate" />
+	
 	<haxelib name="hscript-iris" />
 
 	<!-- _________________________ Application Settings _________________________ -->

@@ -1,9 +1,12 @@
+import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 
 class InitState extends FlxState {
 	override function create() {
 		super.create();
+
+		FlxSprite.defaultAntialiasing = false;
 
 		Conductor.instance = new Conductor();
 

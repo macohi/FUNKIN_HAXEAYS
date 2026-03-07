@@ -1,10 +1,12 @@
-package data;
+package data.characters;
 
-import data.CharacterType;
+import data.objects.*;
 
 typedef CharacterMetadata = {
 	type:CharacterType,
 	imageName:String,
+
+	tags:Array<ObjectTagData>,
 
 	animations:Array<ObjectAnimationData>,
 }
