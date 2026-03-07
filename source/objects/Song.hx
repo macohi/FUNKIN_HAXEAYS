@@ -25,6 +25,14 @@ class Song extends ScriptHolder
 
 		this.id = id;
 
+		
+
+		if (!Assets.exists(getPath('meta${Constants.EXT_SONG_META}')))
+		{
+			DebugLogger.error('Song ${this.id} is missing it\'s metadata file');
+			return;
+		}
+
 		try
 		{
 			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_SONG_META}')));

@@ -30,6 +30,12 @@ class Character extends AYSSprite
 
 		this.id = id;
 
+		if (!Assets.exists(getPath('meta${Constants.EXT_CHARACTER_META}')))
+		{
+			DebugLogger.error('Character ${this.id} is missing their metadata file');
+			return;
+		}
+
 		try
 		{
 			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_CHARACTER_META}')));
