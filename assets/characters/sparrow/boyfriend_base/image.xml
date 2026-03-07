@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="image.png">
+	<!-- Created with Adobe Animate version 23.0.0.407 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bf anim down0000" x="4" y="4" width="334" height="457"/>
+	<SubTexture name="bf anim idle0000" x="346" y="4" width="283" height="501"/>
+	<SubTexture name="bf anim left0000" x="637" y="4" width="276" height="503"/>
+	<SubTexture name="bf anim right0000" x="921" y="4" width="285" height="512"/>
+	<SubTexture name="bf anim up0000" x="1214" y="4" width="274" height="515"/>
+</TextureAtlas>
