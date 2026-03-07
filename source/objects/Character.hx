@@ -51,6 +51,8 @@ class Character extends AYSSprite
 			default:
 				DebugLogger.error('Character "${this.id}" has an unknown type: ${metadata.type}');
 		}
+
+		dance();
 	}
 
 	public function loadSparrowCharacter()
@@ -80,5 +82,10 @@ class Character extends AYSSprite
 			if (anim.type == prefix)
 				addPrefixAnimation(anim.name, anim.prefix, anim.fps ?? 24, anim.looped ?? false);
 		}
+	}
+
+	public function dance()
+	{
+		playAnim('idle');
 	}
 }
