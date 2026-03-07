@@ -15,6 +15,8 @@ class PlayState extends MusicBeatState
 	public var audioFiles:Array<FlxSound> = [];
 
 	public var player:Character;
+	public var damsel:Character;
+	public var opponent:Character;
 
 	override public function create()
 	{
@@ -30,6 +32,18 @@ class PlayState extends MusicBeatState
 		{
 			player = new Character(song.player);
 			add(player);
+		}
+
+		if (song.damsel != null)
+		{
+			damsel = new Character(song.damsel);
+			add(damsel);
+		}
+
+		if (song.opponent != null)
+		{
+			opponent = new Character(song.opponent);
+			add(opponent);
 		}
 
 		scriptCall('onSongStart');
