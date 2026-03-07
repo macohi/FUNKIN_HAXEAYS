@@ -157,7 +157,7 @@ class Character extends AYSSprite {
 	}
 
 	public function getTag(tagName:String):ObjectTagData {
-		for (tag in metadata.tags ?? [])
+		for (tag in metadata?.tags ?? [])
 			if (tag.name == tagName)
 				return tag;
 
@@ -180,8 +180,7 @@ class Character extends AYSSprite {
 			playAnim('dance' + ((danced) ? 'Left' : 'Right'));
 
 			return;
-		}
-
-		playAnim('idle');
+		} else
+			playAnim('idle');
 	}
 }

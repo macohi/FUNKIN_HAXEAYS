@@ -11,11 +11,17 @@ class PlayState extends MusicBeatState {
 
 	public var song:Song;
 
-	public var audioFiles:Array<FlxSound> = [];
+	public var audioFiles(get, never):Array<FlxSound>;
+
+	function get_audioFiles():Array<FlxSound>
+		return song.audioFiles;
 
 	public var player:Character;
 	public var damsel:Character;
 	public var opponent:Character;
+
+	public var songLoaded:Bool = false;
+	public var songStarted:Bool = false;
 
 	override public function create() {
 		super.create();
@@ -25,6 +31,8 @@ class PlayState extends MusicBeatState {
 		instance = this;
 
 		song = new Song('bopeebo');
+
+		songLoaded = true;
 
 		if (song.player != null) {
 			player = new Character(song.player);
@@ -51,7 +59,6 @@ class PlayState extends MusicBeatState {
 		}
 
 		conductor.bpm = song.startingBPM;
-		song.playAudio();
 
 		scriptCall('onSongStart');
 	}
@@ -67,9 +74,47 @@ class PlayState extends MusicBeatState {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (audioFiles.length > 0)
-			conductor.time = audioFiles[0].time;
+		if (songLoaded) {
+			conductor.time += elapsed * Constants.MS_PER_SEC;
+			conductor.update();
+
+			if (conductor.time >= 0 && !songStarted)
+				startSong();
+
+			checkSongTime();
+		}
 	}
+
+	public function startSong() {
+		song.playAudio();
+		songStarted = true;
+	}
+
+	public function checkSongTime() {
+		if (audioFiles.length < 1)
+			return;
+
+		// End the song if the time has come...
+		// Doing this normally has a problem unfortunately :(
+		if (conductor.time >= audioFiles[0].length) {
+			endSong();
+			return;
+		}
+
+		// Don't resync if the song isn't playing
+		if (!audioFiles[0].playing)
+			return;
+
+		if (Math.abs(conductor.time - audioFiles[0].time) > Constants.RESYNC_THRESHOLD) {
+			for (i => audio in audioFiles) {
+				audio.pause();
+				audio.time = conductor.time;
+				audio.play();
+			}
+		}
+	}
+
+	public function endSong() {}
 
 	override function beatHit(beat:Int) {
 		super.beatHit(beat);
