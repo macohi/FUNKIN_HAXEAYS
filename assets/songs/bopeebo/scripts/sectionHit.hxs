@@ -1,0 +1,12 @@
+function sectionHit(section:Int)
+{
+    var dad:Character = PlayState.instance.stage.opponent;
+    var bf:Character = PlayState.instance.stage.player;
+
+    // trace(Std.string(section));
+
+    if (section % 2 == 0)
+        PlayState.instance.camFollow.setPosition(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
+    else
+        PlayState.instance.camFollow.setPosition(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y);
+}

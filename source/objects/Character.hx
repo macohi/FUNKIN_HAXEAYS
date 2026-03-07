@@ -1,5 +1,6 @@
 package objects;
 
+import scripting.ScriptManager;
 import data.objects.ObjectAnimationType;
 import data.objects.ObjectTagData;
 import animate.FlxAnimateFrames;
@@ -13,7 +14,7 @@ import haxe.Json;
 import data.characters.*;
 import objects.AYSSprite;
 
-class Character extends AYSSprite {
+class Character extends Bopper {
 	public var id:String = '';
 
 	public var metadata:CharacterMetadata;
@@ -46,29 +47,9 @@ class Character extends AYSSprite {
 		if (metadata != null)
 			loadCharacter();
 
-		trace('Reading script folder for character: ${this.id}');
-		try {
-			final scriptsFolder:Array<String> = FileSystem.readDirectory(getPath('scripts'));
-
-			for (script in scriptsFolder) {
-				final getScriptPath = function(s) {
-					return getPath('scripts/$s');
-				}
-
-				if (FileSystem.isDirectory(getScriptPath(script))) {
-					trace(' * subdirectory (unsupported): ${getScriptPath(script)}');
-					continue;
-				}
-
-				trace(' * file: ${getScriptPath(script)}');
-
-				var characterScript = new CharacterScript(this.id, script);
-				scriptHolder.scriptFiles.push(characterScript);
-			}
-
-		} catch (e) {
-			trace(' * Error reading script folder for character "${this.id}": $e');
-		}
+		scriptFiles = ScriptManager.readScriptFolder(getPath('scripts'), function(s) {
+			return new CharacterScript(this.id, s);
+		});
 	}
 
 	public var scriptFiles(get, set):Array<BaseScript>;
@@ -101,7 +82,7 @@ class Character extends AYSSprite {
 				loadTextureAtlasCharacter();
 
 			default:
-				DebugLogger.error('Character "${this.id}" has an unknown type: ${metadata.type}');
+				DebugLogger.error('Character "${this.id}" has an unknown or unsupported asset type: ${metadata.type}');
 		}
 
 		animationOffsets.clear();
@@ -175,7 +156,7 @@ class Character extends AYSSprite {
 
 	public var danced:Bool = false;
 
-	public function dance() {
+	override public function dance() {
 		danced = !danced;
 
 		scriptSet('o', false);
@@ -190,22 +171,12 @@ class Character extends AYSSprite {
 
 			return;
 		} else
-			playAnim('idle');
+			super.dance();
 	}
 
-	public var animationOffsets:Map<String, Array<Float>> = [];
-
-	override function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0) {
-		applyGeneralOffsets();
-		if (animationOffsets.exists(animName))
-			offset.add(animationOffsets?.get(animName)[0] ?? 0, animationOffsets?.get(animName)[1] ?? 0);
-
-		super.playAnim(animName, force, reversed, frame);
-	}
-
-	public function applyGeneralOffsets() {
+	override public function applyGeneralOffsets() {
 		if (metadata == null || metadata.generalOffsets == null) {
-			offset.set(0, 0);
+			super.applyGeneralOffsets();
 			return;
 		}
 

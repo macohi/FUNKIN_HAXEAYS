@@ -1,5 +1,6 @@
 package ui;
 
+import flixel.util.FlxSort;
 import flixel.FlxState;
 
 class MusicBeatState extends FlxState {
@@ -23,12 +24,16 @@ class MusicBeatState extends FlxState {
 		conductor.sectionHit.remove(sectionHit);
 	}
 
-	function stepHit(step:Int) {}
+	public function stepHit(step:Int) {}
 
-	function beatHit(beat:Int) {}
+	public function beatHit(beat:Int) {}
 
-	function sectionHit(section:Int) {}
+	public function sectionHit(section:Int) {}
 
 	inline function get_conductor():Conductor
 		return Conductor.instance;
+
+	public function refresh() {
+		members.sort((b1, b2) -> Constants.sortByZIndex(FlxSort.ASCENDING, b1, b2));
+	}
 }

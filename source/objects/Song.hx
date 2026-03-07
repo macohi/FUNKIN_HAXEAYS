@@ -1,12 +1,13 @@
 package objects;
 
+import scripting.ScriptManager;
 import sys.FileSystem;
 import scripting.SongScript;
 import flixel.sound.FlxSound;
 import debugging.DebugLogger;
 import lime.utils.Assets;
 import haxe.Json;
-import data.SongMetaData;
+import data.song.SongMetaData;
 
 class Song extends ScriptHolder {
 	public var id:String = '';
@@ -45,28 +46,9 @@ class Song extends ScriptHolder {
 			}
 		}
 
-		trace('Reading script folder for song: ${this.id}');
-		try {
-			final scriptsFolder:Array<String> = FileSystem.readDirectory(getPath('scripts'));
-
-			for (script in scriptsFolder) {
-				final getScriptPath = function(s) {
-					return getPath('scripts/$s');
-				}
-
-				if (FileSystem.isDirectory(getScriptPath(script))) {
-					trace(' * subdirectory (unsupported): ${getScriptPath(script)}');
-					continue;
-				}
-
-				trace(' * file: ${getScriptPath(script)}');
-
-				var songScript = new SongScript(this.id, script);
-				scriptFiles.push(songScript);
-			}
-		} catch (e) {
-			trace(' * Error reading script folder for song "${this.id}": $e');
-		}
+		scriptFiles = ScriptManager.readScriptFolder(getPath('scripts'), function(s) {
+			return new SongScript(this.id, s);
+		});
 	}
 
 	public var audioFiles:Array<FlxSound> = [];

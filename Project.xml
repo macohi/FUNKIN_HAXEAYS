@@ -15,6 +15,9 @@
 	<haxedef name="HXCPP_STACK_LINE" if="desktop" />
 	<haxedef name="HXCPP_STACK_TRACE" if="desktop" />
 
+	
+	<haxeflag name="--macro" value="addMetadata('@:build(macros.ZIndex.apply())', 'flixel.FlxBasic')" />
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />

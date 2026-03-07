@@ -1,3 +1,4 @@
+import crowplexus.iris.Iris;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.FlxState;

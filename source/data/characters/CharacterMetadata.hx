@@ -3,7 +3,7 @@ package data.characters;
 import data.objects.*;
 
 typedef CharacterMetadata = {
-	type:CharacterType,
+	type:ObjectAssetType,
 	imageName:String,
 
 	?tags:Array<ObjectTagData>,
