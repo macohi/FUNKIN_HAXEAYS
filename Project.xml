@@ -4,6 +4,10 @@
 
 	<!-- _________________________________ Custom _______________________________ -->
 
+	<error value="HTML5 not supported" if="html5"/>
+
+	<define name="hscriptPos" />
+
 	<!-- HScript relies heavily on Reflection, which means we can't use DCE. -->
 	<haxeflag name="-dce no" />
 
@@ -14,6 +18,7 @@
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
+	<haxelib name="hscript-iris" />
 
 	<!-- _________________________ Application Settings _________________________ -->
 

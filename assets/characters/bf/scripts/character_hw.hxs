@@ -1,0 +1,4 @@
+function onLoaded()
+{
+	trace('Hello world');
+}

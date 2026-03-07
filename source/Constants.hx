@@ -10,6 +10,7 @@ class Constants
 	public static final EXT_JSON:String = '.json';
 	public static final EXT_XML:String = '.xml';
 	public static final EXT_PNG:String = '.png';
+	public static final EXT_HSCRIPT:String = '.hxs';
 
 	public static final EXT_SONG_META:String = EXT_JSON;
 	public static final EXT_CHARACTER_META:String = EXT_JSON;
