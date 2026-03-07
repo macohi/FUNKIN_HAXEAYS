@@ -2,15 +2,14 @@ package data;
 
 import data.ObjectAnimationType;
 
-typedef ObjectAnimationData =
-{
+typedef ObjectAnimationData = {
 	name:String,
-    type:ObjectAnimationType,
-	
-    /** prefix **/
-    ?prefix:String,
+	type:ObjectAnimationType,
 
-    /** general **/
-    ?fps:Int,
-    ?looped:Bool,
+	/** prefix **/
+	?prefix:String,
+
+	/** general **/
+	?fps:Int,
+	?looped:Bool,
 }

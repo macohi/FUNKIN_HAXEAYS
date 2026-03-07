@@ -6,8 +6,7 @@ import flixel.*;
 import objects.*;
 import ui.*;
 
-class ScriptManager
-{
+class ScriptManager {
 	// alot yoinked from mobmod hehehehehaw
 	public static var defaultVariables:Map<String, Dynamic> = [
 		// Haxe related stuff
@@ -16,12 +15,10 @@ class ScriptManager
 		"Reflect" => Reflect,
 		"StringTools" => StringTools,
 		"Json" => haxe.Json,
-		
 		// OpenFL & Lime related stuff
 		"Assets" => openfl.utils.Assets,
 		"Application" => lime.app.Application,
 		"Main" => Main,
-		
 		// Flixel related stuff
 		"FlxG" => flixel.FlxG,
 		"FlxSprite" => flixel.FlxSprite,
@@ -41,7 +38,6 @@ class ScriptManager
 		"FlxPoint" => getMacroAbstractClass("flixel.math.FlxPoint"),
 		"FlxAxes" => getMacroAbstractClass("flixel.util.FlxAxes"),
 		"FlxColor" => getMacroAbstractClass("flixel.util.FlxColor"),
-		
 		// HAXEAYS related stuff
 		'DebugLogger' => DebugLogger,
 		'AYSSprite' => AYSSprite,
@@ -58,13 +54,11 @@ class ScriptManager
 		'PlayState' => PlayState,
 	];
 
-	public static inline function getMacroAbstractClass(className:String)
-	{
+	public static inline function getMacroAbstractClass(className:String) {
 		return Type.resolveClass('${className}_HSC');
 	}
 
-	public static function setDefaultVariables(script:BaseScript)
-	{
+	public static function setDefaultVariables(script:BaseScript) {
 		for (variable => value in defaultVariables)
 			script.set(variable, value, false);
 	}

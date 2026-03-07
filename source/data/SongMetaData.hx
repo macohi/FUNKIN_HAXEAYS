@@ -1,7 +1,6 @@
 package data;
 
-typedef SongMetaData =
-{
+typedef SongMetaData = {
 	name:String,
 	?artist:String,
 

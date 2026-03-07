@@ -1,5 +1,4 @@
-class Constants
-{
+class Constants {
 	public static final MS_PER_SEC:Int = 1000;
 	public static final SECS_PER_MIN:Int = 60;
 	public static final PIXELS_PER_MS:Float = 0.45;

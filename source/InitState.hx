@@ -1,15 +1,12 @@
 import flixel.FlxG;
 import flixel.FlxState;
 
-class InitState extends FlxState
-{
+class InitState extends FlxState {
+	override function create() {
+		super.create();
 
-    override function create() {
-        super.create();
+		Conductor.instance = new Conductor();
 
-        Conductor.instance = new Conductor();
-
-        FlxG.switchState(() -> new PlayState());
-    }
-    
+		FlxG.switchState(() -> new PlayState());
+	}
 }

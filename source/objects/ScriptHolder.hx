@@ -2,8 +2,7 @@ package objects;
 
 import scripting.BaseScript;
 
-class ScriptHolder
-{
+class ScriptHolder {
 	public var scriptFiles:Array<BaseScript> = [];
 
 	public function scriptCall(method:String, ?args:Array<Dynamic>)
@@ -14,8 +13,7 @@ class ScriptHolder
 		for (s in scriptFiles)
 			s.set(variable, value);
 
-	public function scriptGet(variable:String):Dynamic
-	{
+	public function scriptGet(variable:String):Dynamic {
 		var res = null;
 
 		for (s in scriptFiles)

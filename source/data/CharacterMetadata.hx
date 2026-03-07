@@ -2,8 +2,7 @@ package data;
 
 import data.CharacterType;
 
-typedef CharacterMetadata =
-{
+typedef CharacterMetadata = {
 	type:CharacterType,
 	imageName:String,
 

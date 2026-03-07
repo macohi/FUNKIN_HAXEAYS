@@ -6,8 +6,7 @@ import flixel.util.FlxSignal.FlxTypedSignal;
 /**
  * The conductor class for the game. This is what handles steps and beats and all that crap.
  */
-class Conductor
-{
+class Conductor {
 	public static var instance:Conductor;
 
 	public var time:Float;
@@ -29,8 +28,7 @@ class Conductor
 
 	public function new() {}
 
-	public function update()
-	{
+	public function update() {
 		final lastStep:Int = step;
 		final lastBeat:Int = beat;
 		final lastSection:Int = section;
@@ -59,8 +57,7 @@ class Conductor
 	 * Resets everything, including time, BPM, and steps.
 	 * You're going to want to run this whenever music is changed.
 	 */
-	public function reset(bpm:Float = 0)
-	{
+	public function reset(bpm:Float = 0) {
 		this.bpm = bpm;
 
 		time = 0;
@@ -73,8 +70,7 @@ class Conductor
 		changeTimestamp = 0;
 	}
 
-	function set_bpm(bpm:Float):Float
-	{
+	function set_bpm(bpm:Float):Float {
 		if (this.bpm == bpm)
 			return bpm;
 		this.bpm = bpm;

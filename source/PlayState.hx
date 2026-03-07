@@ -6,8 +6,7 @@ import objects.Song;
 import ui.MusicBeatState;
 import objects.Character;
 
-class PlayState extends MusicBeatState
-{
+class PlayState extends MusicBeatState {
 	public static var instance:PlayState;
 
 	public var song:Song;
@@ -18,8 +17,7 @@ class PlayState extends MusicBeatState
 	public var damsel:Character;
 	public var opponent:Character;
 
-	override public function create()
-	{
+	override public function create() {
 		super.create();
 
 		if (instance != null)
@@ -28,44 +26,42 @@ class PlayState extends MusicBeatState
 
 		song = new Song('bopeebo');
 
-		if (song.player != null)
-		{
+		if (song.player != null) {
 			player = new Character(song.player);
 			add(player);
+			player.setPosition(770, 100);
 		}
 
-		if (song.damsel != null)
-		{
+		if (song.damsel != null) {
 			damsel = new Character(song.damsel);
 			add(damsel);
+			damsel.setPosition(400, 130);
 		}
 
-		if (song.opponent != null)
-		{
+		if (song.opponent != null) {
 			opponent = new Character(song.opponent);
 			add(opponent);
+
+			opponent.setPosition(100, 100);
 		}
 
 		scriptCall('onSongStart');
 		song.playAudio();
 	}
 
-	public function scriptCall(m:String, ?a:Array<Dynamic>)
-	{
+	public function scriptCall(m:String, ?a:Array<Dynamic>) {
 		song.scriptCall(m, a);
 		player.scriptCall(m, a);
 	}
 
-	override public function update(elapsed:Float)
-	{
+	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
 		if (audioFiles.length > 0)
 			conductor.time = audioFiles[0].time;
 	}
 
-	override function beatHit(beat:Int)
-	{
+	override function beatHit(beat:Int) {
 		super.beatHit(beat);
 
 		player.dance();

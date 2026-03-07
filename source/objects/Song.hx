@@ -8,48 +8,37 @@ import lime.utils.Assets;
 import haxe.Json;
 import data.SongMetaData;
 
-class Song extends ScriptHolder
-{
+class Song extends ScriptHolder {
 	public var id:String = '';
 
-	public function getPath(path:String):String
-	{
+	public function getPath(path:String):String {
 		return 'assets/songs/${this.id}/$path';
 	}
 
 	public var metadata:SongMetaData;
 
-	override public function new(id:String = 'bopeebo')
-	{
+	override public function new(id:String = 'bopeebo') {
 		super();
 
 		this.id = id;
 
-		
-
-		if (!Assets.exists(getPath('meta${Constants.EXT_SONG_META}')))
-		{
+		if (!Assets.exists(getPath('meta${Constants.EXT_SONG_META}'))) {
 			DebugLogger.error('Song ${this.id} is missing it\'s metadata file');
 			return;
 		}
 
-		try
-		{
+		try {
 			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_SONG_META}')));
-		}
-		catch (e)
-		{
+		} catch (e) {
 			DebugLogger.error('Song "${this.id}" had issues loading the metadata file: ${e}');
 			metadata = null;
 		}
 
 		if (songFiles.length == 0)
 			DebugLogger.error('Song "${this.id}" has no audio files. Why?');
-		else
-		{
+		else {
 			trace('Adding audio files for song: ${this.id}');
-			for (audioFile in songFiles)
-			{
+			for (audioFile in songFiles) {
 				var a:FlxSound = new FlxSound().loadEmbedded(getPath('audio/$audioFile${Constants.EXT_AUDIO}'));
 				trace(' * $audioFile');
 				audioFiles.push(a);
@@ -57,19 +46,15 @@ class Song extends ScriptHolder
 		}
 
 		trace('Reading script folder for song: ${this.id}');
-		try
-		{
+		try {
 			final scriptsFolder:Array<String> = FileSystem.readDirectory(getPath('scripts'));
 
-			for (script in scriptsFolder)
-			{
-				final getScriptPath = function(s)
-				{
+			for (script in scriptsFolder) {
+				final getScriptPath = function(s) {
 					return getPath('scripts/$s');
 				}
 
-				if (FileSystem.isDirectory(getScriptPath(script)))
-				{
+				if (FileSystem.isDirectory(getScriptPath(script))) {
 					trace(' * subdirectory (unsupported): ${getScriptPath(script)}');
 					continue;
 				}
@@ -79,9 +64,7 @@ class Song extends ScriptHolder
 				var songScript = new SongScript(this.id, script);
 				scriptFiles.push(songScript);
 			}
-		}
-		catch (e)
-		{
+		} catch (e) {
 			trace(' * Error reading script folder for song "${this.id}": $e');
 		}
 	}

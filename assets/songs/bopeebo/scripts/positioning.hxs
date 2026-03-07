@@ -1,6 +1,0 @@
-function onSongStart()
-{
-	PlayState.instance.player.setPosition(770, 100);
-	PlayState.instance.damsel.setPosition(100, 100);
-	PlayState.instance.opponent.setPosition(100, 100);
-}
