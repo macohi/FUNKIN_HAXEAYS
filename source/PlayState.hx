@@ -1,5 +1,6 @@
 package;
 
+import objects.SongEvent;
 import flixel.FlxObject;
 import flixel.util.FlxSort;
 import flixel.FlxCamera;
@@ -32,6 +33,8 @@ class PlayState extends MusicBeatState {
 	public var camFollow:FlxObject;
 
 	public var cameraZoom:Float = 1.00;
+
+	public var events:Array<SongEvent> = [];
 
 	override public function create() {
 		super.create();
@@ -110,6 +113,19 @@ class PlayState extends MusicBeatState {
 	}
 
 	public function checkSongTime() {
+		for (event in events) {
+			final et = event.time / Constants.MS_PER_SEC;
+			final wrs = Constants.SONG_EVENT_TIME_WIGGLEROOM_MS / Constants.MS_PER_SEC;
+
+			final ct = conductor.time / Constants.MS_PER_SEC;
+
+			if ((et - wrs) < (ct) && (et + wrs) < ct) {
+
+				event.event();
+				events.remove(event);
+			}
+		}
+
 		if (audioFiles.length < 1)
 			return;
 
@@ -119,6 +135,10 @@ class PlayState extends MusicBeatState {
 			endSong();
 			return;
 		}
+	}
+
+	public function addEvent(time:Float, event:Void->Void) {
+		events.push(new SongEvent(time * Constants.MS_PER_SEC, event));
 	}
 
 	override function onFocusLost() {

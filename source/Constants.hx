@@ -23,4 +23,6 @@ class Constants {
 	public static inline function sortByZIndex(order:Int, b1:FlxBasic, b2:FlxBasic):Int {
 		return FlxSort.byValues(order, b1?.zIndex ?? 0, b2?.zIndex ?? 0);
 	}
+
+	public static final SONG_EVENT_TIME_WIGGLEROOM_MS:Float = 20;
 }

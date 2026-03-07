@@ -48,6 +48,7 @@ class ScriptManager {
 		'Character' => Character,
 		'ScriptHolder' => ScriptHolder,
 		'Song' => Song,
+		'SongEvent' => SongEvent,
 		'Stage' => Stage,
 		'BaseScript' => BaseScript,
 		'CharacterScript' => CharacterScript,

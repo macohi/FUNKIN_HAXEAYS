@@ -1,0 +1,9 @@
+function onSongLoaded()
+{
+    var addEvent = PlayState.instance.addEvent;
+    
+    addEvent(10, function() {
+        trace('hi');
+        trace(' * ' + (PlayState.instance.conductor.time / Constants.MS_PER_SEC));
+    });
+}
