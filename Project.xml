@@ -4,7 +4,8 @@
 
 	<!-- _________________________________ Custom _______________________________ -->
 
-	<!--Place custom nodes like icons here-->
+	<!-- HScript relies heavily on Reflection, which means we can't use DCE. -->
+	<haxeflag name="-dce no" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 

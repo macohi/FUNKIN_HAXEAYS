@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="image.png">
+<TextureAtlas imagePath="atlas.png">
 	<!-- Created with Adobe Animate version 23.0.0.407 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="bf anim down0000" x="4" y="4" width="334" height="457"/>
