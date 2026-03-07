@@ -69,7 +69,56 @@ class PlayState extends MusicBeatState {
 
 		songLoaded = true;
 		refresh();
-		scriptCall('onSongStart');
+		scriptCall('onSongLoaded');
+	}
+
+	public var focusLostPause:Bool = false;
+	public var paused:Bool = false;
+
+	public function pause() {
+		paused = !paused;
+
+		if (paused) {
+			song.pauseAudio();
+		} else {
+			song.playAudio();
+		}
+	}
+
+	public function startSong() {
+		song.playAudio();
+		songStarted = true;
+		scriptCall('onSongStarted');
+	}
+
+	public function endSong() {}
+
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+
+		if (songLoaded) {
+			conductor.time += elapsed * Constants.MS_PER_SEC;
+			conductor.update();
+
+			if (conductor.time >= 0 && !songStarted)
+				startSong();
+
+			checkSongTime();
+		}
+
+		camGame.zoom = cameraZoom;
+	}
+
+	public function checkSongTime() {
+		if (audioFiles.length < 1)
+			return;
+
+		// End the song if the time has come...
+		// Doing this normally has a problem unfortunately :(
+		if (conductor.time >= audioFiles[0].length) {
+			endSong();
+			return;
+		}
 	}
 
 	override function onFocusLost() {
@@ -90,19 +139,6 @@ class PlayState extends MusicBeatState {
 		}
 	}
 
-	public var focusLostPause:Bool = false;
-	public var paused:Bool = false;
-
-	public function pause() {
-		paused = !paused;
-
-		if (paused) {
-			song.pauseAudio();
-		} else {
-			song.playAudio();
-		}
-	}
-
 	override function refresh() {
 		super.refresh();
 
@@ -116,41 +152,6 @@ class PlayState extends MusicBeatState {
 		stage?.damsel?.scriptCall(m, a);
 		stage?.opponent?.scriptCall(m, a);
 	}
-
-	override public function update(elapsed:Float) {
-		super.update(elapsed);
-
-		if (songLoaded) {
-			conductor.time += elapsed * Constants.MS_PER_SEC;
-			conductor.update();
-
-			if (conductor.time >= 0 && !songStarted)
-				startSong();
-
-			checkSongTime();
-		}
-
-		camGame.zoom = cameraZoom;
-	}
-
-	public function startSong() {
-		song.playAudio();
-		songStarted = true;
-	}
-
-	public function checkSongTime() {
-		if (audioFiles.length < 1)
-			return;
-
-		// End the song if the time has come...
-		// Doing this normally has a problem unfortunately :(
-		if (conductor.time >= audioFiles[0].length) {
-			endSong();
-			return;
-		}
-	}
-
-	public function endSong() {}
 
 	override function beatHit(beat:Int) {
 		super.beatHit(beat);
