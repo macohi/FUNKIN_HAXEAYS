@@ -10,6 +10,18 @@ class InitState extends FlxState {
 
 		Conductor.instance = new Conductor();
 
+		FlxG.signals.postUpdate.add(function() {
+			if (FlxG.keys.justReleased.F3) {
+				if (PlayState.instance != null)
+				{
+					for (audio in PlayState.instance.audioFiles)
+						audio.destroy();
+				}
+
+				FlxG.resetGame();
+			}
+		});
+
 		FlxG.switchState(() -> new PlayState());
 	}
 }

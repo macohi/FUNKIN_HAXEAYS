@@ -1,0 +1,37 @@
+{
+    "type": "sparrow",
+    "imageName": "atlas",
+
+    "generalOffsets": [
+        0,
+        80
+    ],
+
+    "animations": [
+        {
+            "name": "idle",
+            "type": "prefix",
+            "prefix": "daddy anim idle"
+        },
+        {
+            "name": "left",
+            "type": "prefix",
+            "prefix": "daddy anim left"
+        },
+        {
+            "name": "down",
+            "type": "prefix",
+            "prefix": "daddy anim down"
+        },
+        {
+            "name": "up",
+            "type": "prefix",
+            "prefix": "daddy anim up"
+        },
+        {
+            "name": "right",
+            "type": "prefix",
+            "prefix": "daddy anim right"
+        }
+    ]
+}

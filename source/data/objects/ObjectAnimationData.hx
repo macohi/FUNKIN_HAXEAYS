@@ -13,4 +13,5 @@ typedef ObjectAnimationData = {
 	/** general **/
 	?fps:Int,
 	?looped:Bool,
+	?offsets:Array<Float>
 }

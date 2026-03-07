@@ -6,7 +6,9 @@ typedef CharacterMetadata = {
 	type:CharacterType,
 	imageName:String,
 
-	tags:Array<ObjectTagData>,
+	?tags:Array<ObjectTagData>,
 
-	animations:Array<ObjectAnimationData>,
+	?animations:Array<ObjectAnimationData>,
+
+	?generalOffsets:Array<Float>,
 }

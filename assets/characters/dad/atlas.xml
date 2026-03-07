@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="atlas.png">
+	<!-- Created with Adobe Animate version 23.0.0.407 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="daddy anim down0000" x="4" y="4" width="339" height="540"/>
+	<SubTexture name="daddy anim idle0000" x="351" y="4" width="321" height="644"/>
+	<SubTexture name="daddy anim left0000" x="680" y="4" width="323" height="640"/>
+	<SubTexture name="daddy anim right0000" x="1011" y="4" width="308" height="639"/>
+	<SubTexture name="daddy anim up0000" x="1327" y="4" width="342" height="644"/>
+</TextureAtlas>

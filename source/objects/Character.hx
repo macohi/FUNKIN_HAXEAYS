@@ -65,6 +65,7 @@ class Character extends AYSSprite {
 				var characterScript = new CharacterScript(this.id, script);
 				scriptHolder.scriptFiles.push(characterScript);
 			}
+
 		} catch (e) {
 			trace(' * Error reading script folder for character "${this.id}": $e');
 		}
@@ -101,6 +102,14 @@ class Character extends AYSSprite {
 
 			default:
 				DebugLogger.error('Character "${this.id}" has an unknown type: ${metadata.type}');
+		}
+
+		animationOffsets.clear();
+		applyGeneralOffsets();
+
+		for (animation in metadata.animations) {
+			if (animation.offsets != null)
+				animationOffsets.set(animation.name, [(animation?.offsets[0] ?? 0), (animation?.offsets[1] ?? 0),]);
 		}
 
 		dance();
@@ -182,5 +191,24 @@ class Character extends AYSSprite {
 			return;
 		} else
 			playAnim('idle');
+	}
+
+	public var animationOffsets:Map<String, Array<Float>> = [];
+
+	override function playAnim(animName:String, force:Bool = false, reversed:Bool = false, frame:Int = 0) {
+		applyGeneralOffsets();
+		if (animationOffsets.exists(animName))
+			offset.add(animationOffsets?.get(animName)[0] ?? 0, animationOffsets?.get(animName)[1] ?? 0);
+
+		super.playAnim(animName, force, reversed, frame);
+	}
+
+	public function applyGeneralOffsets() {
+		if (metadata == null || metadata.generalOffsets == null) {
+			offset.set(0, 0);
+			return;
+		}
+
+		offset.set(metadata?.generalOffsets[0] ?? 0, metadata?.generalOffsets[1] ?? 0);
 	}
 }
