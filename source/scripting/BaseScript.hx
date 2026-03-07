@@ -8,7 +8,8 @@ class BaseScript extends Iris
 {
 	override public function new(path:String)
 	{
-		if (Path.extension(path) == Constants.EXT_HSCRIPT.substr(1)) path = Path.withoutExtension(path);
+		if (Path.extension(path) == Constants.EXT_HSCRIPT.substr(1))
+			path = Path.withoutExtension(path);
 
 		final scriptPath:String = 'assets/$path${Constants.EXT_HSCRIPT}';
 
