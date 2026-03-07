@@ -100,18 +100,6 @@ class PlayState extends MusicBeatState {
 			endSong();
 			return;
 		}
-
-		// Don't resync if the song isn't playing
-		if (!audioFiles[0].playing)
-			return;
-
-		if (Math.abs(conductor.time - audioFiles[0].time) > Constants.RESYNC_THRESHOLD) {
-			for (i => audio in audioFiles) {
-				audio.pause();
-				audio.time = conductor.time;
-				audio.play();
-			}
-		}
 	}
 
 	public function endSong() {}
