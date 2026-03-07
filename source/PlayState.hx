@@ -26,30 +26,14 @@ class PlayState extends MusicBeatState
 
 		song = new Song('bopeebo');
 
-		trace('Adding song(${song.id}) audioFiles');
-		for (audioFile in song.audioFiles)
-		{
-			var a:FlxSound = new FlxSound().loadEmbedded(song.getPath('$audioFile${Constants.EXT_AUDIO}'));
-			trace(' * $audioFile');
-			audioFiles.push(a);
-		}
-
 		if (song.player != null)
 		{
 			player = new Character(song.player);
 			add(player);
 		}
 
-		playAudio();
+		song.playAudio();
 	}
-
-	public function playAudio()
-		for (a in audioFiles)
-			a.play();
-
-	public function pauseAudio()
-		for (a in audioFiles)
-			a.pause();
 
 	override public function update(elapsed:Float)
 	{

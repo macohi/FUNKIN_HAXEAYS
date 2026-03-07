@@ -7,7 +7,7 @@ typedef SongMetaData =
 
 	startingBPM:Null<Float>,
 
-	audioFiles:Array<String>,
+	songFiles:Array<String>,
 
 	?opponent:String,
 	?player:String,

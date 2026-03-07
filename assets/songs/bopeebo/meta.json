@@ -4,7 +4,7 @@
     
     "startingBPM": 100,
     
-    "audioFiles": [
+    "songFiles": [
         "Inst",
         "Voices-bf",
         "Voices-dad"

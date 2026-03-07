@@ -1,5 +1,6 @@
 package objects;
 
+import flixel.sound.FlxSound;
 import debugging.DebugLogger;
 import lime.utils.Assets;
 import haxe.Json;
@@ -30,9 +31,29 @@ class Song
 			metadata = null;
 		}
 
-		if (audioFiles.length == 0)
+		if (songFiles.length == 0)
 			DebugLogger.error('Song "${this.id}" has no audio files. Why?');
+		else
+		{
+			trace('Adding audio files for song: ${this.id}');
+			for (audioFile in songFiles)
+			{
+				var a:FlxSound = new FlxSound().loadEmbedded(getPath('audio/$audioFile${Constants.EXT_AUDIO}'));
+				trace(' * $audioFile');
+				audioFiles.push(a);
+			}
+		}
 	}
+
+	public var audioFiles:Array<FlxSound> = [];
+
+	public function playAudio()
+		for (a in audioFiles)
+			a.play();
+
+	public function pauseAudio()
+		for (a in audioFiles)
+			a.pause();
 
 	public var name(get, never):Null<String>;
 
@@ -44,10 +65,10 @@ class Song
 	function get_artist():Null<String>
 		return metadata.artist ?? 'Unknown';
 
-	public var audioFiles(get, never):Null<Array<String>>;
+	public var songFiles(get, never):Null<Array<String>>;
 
-	function get_audioFiles():Null<Array<String>>
-		return metadata.audioFiles ?? [];
+	function get_songFiles():Null<Array<String>>
+		return metadata.songFiles ?? [];
 
 	public var startingBPM(get, never):Null<Float>;
 
