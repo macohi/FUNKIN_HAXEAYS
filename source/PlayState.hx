@@ -32,7 +32,14 @@ class PlayState extends MusicBeatState
 			add(player);
 		}
 
+		scriptCall('onSongStart');
 		song.playAudio();
+	}
+
+	public function scriptCall(m:String, ?a:Array<Dynamic>)
+	{
+		song.scriptCall(m, a);
+		player.scriptCall(m, a);
 	}
 
 	override public function update(elapsed:Float)

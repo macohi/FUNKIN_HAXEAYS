@@ -2,11 +2,12 @@
 	"search.exclude": {
 		"export/**/*.*": true
 	},
-
 	"lime.buildTypes": [
 		{
 			"label": "Indev",
-			"args": ["-DIndev"],
+			"args": [
+				"-DIndev"
+			],
 			"enabled": true,
 		}
 	],

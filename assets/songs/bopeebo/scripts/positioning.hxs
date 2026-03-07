@@ -1,0 +1,4 @@
+function onSongStart()
+{
+	PlayState.instance.player.setPosition(770, 100);
+}

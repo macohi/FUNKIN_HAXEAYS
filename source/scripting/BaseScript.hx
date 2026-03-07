@@ -22,6 +22,14 @@ class BaseScript extends Iris
 		call('onLoaded');
 	}
 
+	override function call(fun:String, ?args:Array<Dynamic>):IrisCall {
+
+		@:privateAccess
+		if (!this.interp.variables.exists(fun)) return null;
+
+		return super.call(fun, args);
+	}
+
 	public function setDefaultVariables()
 	{
 		ScriptManager.setDefaultVariables(this);
