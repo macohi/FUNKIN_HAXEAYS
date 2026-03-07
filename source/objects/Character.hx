@@ -27,7 +27,7 @@ class Character extends AYSSprite
 
 		try
 		{
-			metadata = Json.parse(Assets.getText(getPath('meta.json')));
+			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_CHARACTER_META}')));
 		}
 		catch (e)
 		{
@@ -59,7 +59,7 @@ class Character extends AYSSprite
 	{
 		final imageName = metadata.imageName ?? 'atlas';
 
-		this.frames = FlxAtlasFrames.fromSparrow(getPath('$imageName.png'), getPath('$imageName.xml'));
+		this.frames = FlxAtlasFrames.fromSparrow(getPath('$imageName${Constants.EXT_PNG}'), getPath('$imageName${Constants.EXT_XML}'));
 
 		if (metadata.animations == null)
 		{
