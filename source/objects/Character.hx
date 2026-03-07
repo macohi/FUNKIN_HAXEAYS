@@ -71,7 +71,10 @@ class Character extends AYSSprite
 				continue;
 
 			if (![ObjectAnimationType.prefix].contains(anim.type))
+			{
+				trace(' * Unsupported animation (${anim.name}) OAT: ${anim.type}');
 				continue;
+			}
 
 			trace(' * Adding ${anim.type} animation: ${anim.name}');
 			if (anim.type == prefix)
