@@ -4,7 +4,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="FUNKIN_HAXEAYS" file="FUNKIN_HAXEAYS"/>
+	<app title="Friday Night Funkin' Haxe AYS" file="HAXEAYS"/>
 	<app company="Macohi" />
 	<app version="0.1.0"/>
 	<app main="Main" />
