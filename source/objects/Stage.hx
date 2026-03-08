@@ -1,5 +1,6 @@
 package objects;
 
+import registries.StageRegistry;
 import data.song.SongMetaData;
 import data.stage.StagePropData;
 import data.stage.StageCharacterInfoData;
@@ -64,17 +65,12 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 			opponent.x -= opponent.width;
 		}
 
-		if (!Assets.exists(getPath('meta${Constants.EXT_STAGE_META}'))) {
-			DebugLogger.error('Stage ${this.id} is missing their metadata file');
+		if (!StageRegistry.instance.data.exists(id)) {
+			DebugLogger.error('Character ${this.id} is missing their metadata file');
 			return;
 		}
 
-		try {
-			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_STAGE_META}')));
-		} catch (e) {
-			DebugLogger.error('Stage ${this.id} had issues loading the metadata file: ${e}');
-			metadata = null;
-		}
+		metadata = StageRegistry.instance.getEntry(id);
 
 		if (metadata != null) {
 			loadProps();

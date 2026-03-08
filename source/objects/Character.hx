@@ -1,5 +1,6 @@
 package objects;
 
+import registries.CharacterRegistry;
 import flixel.math.FlxPoint;
 import scripting.ScriptManager;
 import data.objects.ObjectAnimationType;
@@ -35,17 +36,12 @@ class Character extends Bopper {
 
 		cameraFollowPoint = new FlxPoint();
 
-		if (!Assets.exists(getPath('meta${Constants.EXT_CHARACTER_META}'))) {
+		if (!CharacterRegistry.instance.data.exists(id)) {
 			DebugLogger.error('Character ${this.id} is missing their metadata file');
 			return;
 		}
 
-		try {
-			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_CHARACTER_META}')));
-		} catch (e) {
-			DebugLogger.error('Character ${this.id} had issues loading the metadata file: ${e}');
-			metadata = null;
-		}
+		metadata = CharacterRegistry.instance.getEntry(id);
 
 		if (metadata != null)
 			loadCharacter();
@@ -54,25 +50,6 @@ class Character extends Bopper {
 			return new CharacterScript(this.id, s);
 		});
 	}
-
-	public var scriptFiles(get, set):Array<BaseScript>;
-
-	function get_scriptFiles():Array<BaseScript> {
-		return scriptHolder.scriptFiles;
-	}
-
-	function set_scriptFiles(scriptFiles:Array<BaseScript>):Array<BaseScript> {
-		return scriptHolder.scriptFiles = scriptFiles;
-	}
-
-	public function scriptCall(method:String, ?args:Array<Dynamic>)
-		scriptHolder.scriptCall(method, args);
-
-	public function scriptSet(variable:String, value:Dynamic)
-		scriptHolder.scriptSet(variable, value);
-
-	public function scriptGet(variable:String):Dynamic
-		return scriptHolder.scriptGet(variable);
 
 	public var cameraFollowPoint:FlxPoint = new FlxPoint(0, 0);
 
@@ -189,4 +166,23 @@ class Character extends Bopper {
 
 		offset.set(metadata?.generalOffsets[0] ?? 0, metadata?.generalOffsets[1] ?? 0);
 	}
+
+	public var scriptFiles(get, set):Array<BaseScript>;
+
+	function get_scriptFiles():Array<BaseScript> {
+		return scriptHolder.scriptFiles;
+	}
+
+	function set_scriptFiles(scriptFiles:Array<BaseScript>):Array<BaseScript> {
+		return scriptHolder.scriptFiles = scriptFiles;
+	}
+
+	public function scriptCall(method:String, ?args:Array<Dynamic>)
+		scriptHolder.scriptCall(method, args);
+
+	public function scriptSet(variable:String, value:Dynamic)
+		scriptHolder.scriptSet(variable, value);
+
+	public function scriptGet(variable:String):Dynamic
+		return scriptHolder.scriptGet(variable);
 }

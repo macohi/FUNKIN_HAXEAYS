@@ -1,5 +1,6 @@
 package objects;
 
+import registries.SongRegistry;
 import scripting.ScriptManager;
 import sys.FileSystem;
 import scripting.SongScript;
@@ -23,17 +24,12 @@ class Song extends ScriptHolder {
 
 		this.id = id;
 
-		if (!Assets.exists(getPath('meta${Constants.EXT_SONG_META}'))) {
+		if (!SongRegistry.instance.data.exists(this.id)) {
 			DebugLogger.error('Song ${this.id} is missing it\'s metadata file');
 			return;
 		}
 
-		try {
-			metadata = Json.parse(Assets.getText(getPath('meta${Constants.EXT_SONG_META}')));
-		} catch (e) {
-			DebugLogger.error('Song "${this.id}" had issues loading the metadata file: ${e}');
-			metadata = null;
-		}
+		metadata = SongRegistry.instance.getEntry(this.id);
 
 		if (songFiles.length == 0)
 			DebugLogger.error('Song "${this.id}" has no audio files. Why?');

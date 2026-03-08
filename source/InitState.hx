@@ -1,3 +1,6 @@
+import registries.StageRegistry;
+import registries.CharacterRegistry;
+import registries.SongRegistry;
 import objects.ScriptHolder;
 import scripting.GeneralScript;
 import scripting.ScriptManager;
@@ -14,6 +17,15 @@ class InitState extends FlxState {
 
 		Conductor.instance = new Conductor();
 
+		SongRegistry.instance = new SongRegistry();
+		CharacterRegistry.instance = new CharacterRegistry();
+		StageRegistry.instance = new StageRegistry();
+
+		ScriptManager.generalScriptHolder = new ScriptHolder();
+		ScriptManager.generalScriptHolder.scriptFiles = ScriptManager.readScriptFolder('assets/scripts', function(s) {
+			return new GeneralScript(s);
+		});
+
 		FlxG.signals.postUpdate.add(function() {
 			if (FlxG.keys.justReleased.F3) {
 				if (PlayState.instance != null) {
@@ -23,11 +35,6 @@ class InitState extends FlxState {
 
 				FlxG.resetGame();
 			}
-		});
-
-		ScriptManager.generalScriptHolder = new ScriptHolder();
-		ScriptManager.generalScriptHolder.scriptFiles = ScriptManager.readScriptFolder('assets/scripts/', function(s) {
-			return new GeneralScript(s);
 		});
 
 		FlxG.switchState(() -> new PlayState());
