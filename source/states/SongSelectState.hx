@@ -1,5 +1,6 @@
 package states;
 
+import lime.app.Application;
 import lime.utils.Assets;
 import flixel.util.FlxColor;
 import flixel.FlxG;
@@ -25,6 +26,11 @@ class SongSelectState extends MusicBeatState {
 
 		textList = new FlxTypedGroup<FlxText>();
 		add(textList);
+
+		var watermark:FlxText = new FlxText(0, 10, FlxG.width, '${Application.current.meta.get('version')}', 16);
+		add(watermark);
+		watermark.scrollFactor.set();
+		watermark.alignment = RIGHT;
 
 		var i = 0;
 		for (song in SongRegistry.instance.songList) {
