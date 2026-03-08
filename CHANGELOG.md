@@ -1,4 +1,9 @@
 # 0.2.0 - (3/8/2026)
+- fix: VSlice FocusCamera camera tweens cancel previous ones when active (this applies to ZoomCamera too)
+
+- feat: `zoom` stage field
+    - chore: mainStage has a zoom of `0.9` now
+
 - feat: VSlice "ZoomCamera" event support
     - refactor: Script errors are now traced via `Iris.error` (it makes it more noticable, if your pc supports ansi anyway...)
     - fix: Iris no longer complains about object casting for traces
@@ -16,7 +21,7 @@
     - fix: The `animations` field is now properly an array of animation data and not singular animation data
 
     - feat: proper `sparrow` prop support
-    - feat: `color` prop field
+    - feat: `color` prop field`
     - feat: `startingAnimation` prop field
     - feat: `solid` prop asset type
 

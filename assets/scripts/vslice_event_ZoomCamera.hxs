@@ -7,8 +7,6 @@ function vslice_addevent_ZoomCamera(v:Dynamic, t:Float) {
 	if (v == null)
 		return;
 
-	trace(v);
-
     var zoom:Float = v.zoom ?? DEFAULT_ZOOM;
 
     var duration:Float = v.duration ?? DEFAULT_DURATION;
@@ -41,6 +39,7 @@ function vslice_addevent_ZoomCamera(v:Dynamic, t:Float) {
 			trace('Invalid ease function: ' + easeFunctionName);
 		
 			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+                FlxTween.cancelTweensOf(PlayState.instance, ['cameraZoom']);
 				FlxTween.tween(PlayState.instance, {cameraZoom: zoom}, durSeconds);
 			});
 
@@ -48,6 +47,7 @@ function vslice_addevent_ZoomCamera(v:Dynamic, t:Float) {
         }
 
 		PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+            FlxTween.cancelTweensOf(PlayState.instance, ['cameraZoom']);
 			FlxTween.tween(PlayState.instance, {cameraZoom: zoom}, durSeconds, {
 				ease: easeFunction
 			});
