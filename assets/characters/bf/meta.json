@@ -2,8 +2,8 @@
     "type": "sparrow",
     "imageName": "atlas",
     "cameraOffsets": [
-        0,
-        -200
+        -150,
+        -150
     ],
     "animations": [
         {
