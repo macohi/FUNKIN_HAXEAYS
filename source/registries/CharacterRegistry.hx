@@ -14,11 +14,11 @@ class CharacterRegistry extends BaseRegistry<CharacterMetadata> {
 	}
 
 	override function loadAsset(asset:String):Bool {
-		if (!FileSystem.isDirectory(getPath(asset)))
+		if (!FileSystem.isDirectory(asset))
 			return false;
 
 		try {
-			var assetData:CharacterMetadata = Json.parse(Assets.getText(getPath(asset + '/meta${Constants.EXT_CHARACTER_META}')));
+			var assetData:CharacterMetadata = Json.parse(Assets.getText(asset + '/meta${Constants.EXT_CHARACTER_META}'));
 
 			data.set(Path.withoutExtension(Path.withoutDirectory(asset)), assetData);
 

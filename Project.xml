@@ -51,6 +51,8 @@
 
 	<source path="source" />
 	<assets path="assets" />
+	<assets path="mods" />
+	<assets path=".dev/debugMods" rename="mods" if="INCLUDE_DEBUGMODS"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

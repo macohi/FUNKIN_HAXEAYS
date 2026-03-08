@@ -1,3 +1,4 @@
+import modding.ModCore;
 import states.PlayState;
 import registries.StageRegistry;
 import registries.CharacterRegistry;
@@ -16,6 +17,9 @@ class InitState extends FlxState {
 
 		FlxSprite.defaultAntialiasing = true;
 
+		ModCore.instance = new ModCore();
+		ModCore.instance.init();
+
 		Conductor.instance = new Conductor();
 
 		SongRegistry.instance = new SongRegistry();
@@ -26,6 +30,15 @@ class InitState extends FlxState {
 		ScriptManager.generalScriptHolder.scriptFiles = ScriptManager.readScriptFolder('assets/scripts', function(s) {
 			return new GeneralScript(s);
 		});
+
+		for (mod in ModCore.instance.allMods) {
+			var modScriptFiles = ScriptManager.readScriptFolder('mods/$mod/scripts', function(s) {
+				return new GeneralScript(s);
+			});
+
+			for (script in modScriptFiles)
+				ScriptManager.generalScriptHolder.scriptFiles.push(script);
+		}
 
 		FlxG.signals.postUpdate.add(function() {
 			if (FlxG.keys.justReleased.F3) {

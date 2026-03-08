@@ -14,11 +14,11 @@ class StageRegistry extends BaseRegistry<StageMetaData> {
 	}
 
 	override function loadAsset(asset:String):Bool {
-		if (!FileSystem.isDirectory(getPath(asset)))
+		if (!FileSystem.isDirectory(asset))
 			return false;
 
 		try {
-			var assetData:StageMetaData = Json.parse(Assets.getText(getPath(asset + '/meta${Constants.EXT_STAGE_META}')));
+			var assetData:StageMetaData = Json.parse(Assets.getText(asset + '/meta${Constants.EXT_STAGE_META}'));
 
 			data.set(Path.withoutExtension(Path.withoutDirectory(asset)), assetData);
 

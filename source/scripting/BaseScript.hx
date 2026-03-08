@@ -9,7 +9,7 @@ class BaseScript extends Iris {
 		if (Path.extension(path) == Constants.EXT_HSCRIPT.substr(1))
 			path = Path.withoutExtension(path);
 
-		final scriptPath:String = 'assets/$path${Constants.EXT_HSCRIPT}';
+		final scriptPath:String = AssetPaths.hscript(path);
 
 		super(Assets.getText(scriptPath), {
 			name: scriptPath

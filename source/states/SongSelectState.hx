@@ -27,7 +27,7 @@ class SongSelectState extends MusicBeatState {
 		add(textList);
 
 		var i = 0;
-		for (song in Assets.getText('assets/songs/songList.txt').split('\n')) {
+		for (song in SongRegistry.instance.songList) {
 			song = song.trim();
 			var song_metadata = SongRegistry.instance.getEntry(song);
 

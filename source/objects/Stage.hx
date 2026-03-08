@@ -25,7 +25,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 	private var scriptHolder:ScriptHolder;
 
 	public function getPath(path:String):String {
-		return 'assets/stages/${this.id}/$path';
+		return AssetPaths.path('stages/${this.id}/$path');
 	}
 
 	public var player:Character;

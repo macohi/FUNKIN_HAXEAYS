@@ -1,5 +1,6 @@
 package objects;
 
+import modding.ModCore;
 import registries.SongRegistry;
 import scripting.ScriptManager;
 import sys.FileSystem;
@@ -10,11 +11,13 @@ import lime.utils.Assets;
 import haxe.Json;
 import data.song.SongMetaData;
 
+using StringTools;
+
 class Song extends ScriptHolder {
 	public var id:String = '';
 
 	public function getPath(path:String):String {
-		return 'assets/songs/${this.id}/$path';
+		return AssetPaths.path('songs/${this.id}/$path');
 	}
 
 	public var metadata:SongMetaData;
@@ -36,7 +39,8 @@ class Song extends ScriptHolder {
 		else {
 			trace('Adding audio files for song: ${this.id}');
 			for (audioFile in songFiles) {
-				var a:FlxSound = new FlxSound().loadEmbedded(getPath('audio/$audioFile${Constants.EXT_AUDIO}'));
+
+				var a:FlxSound = new FlxSound().loadEmbedded(getPath('audio/' + audioFile + Constants.EXT_AUDIO));
 				trace(' * $audioFile');
 				audioFiles.push(a);
 			}

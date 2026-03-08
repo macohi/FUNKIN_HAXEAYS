@@ -24,7 +24,7 @@ class Character extends Bopper {
 	private var scriptHolder:ScriptHolder;
 
 	public function getPath(path:String):String {
-		return 'assets/characters/${this.id}/$path';
+		return AssetPaths.path('characters/${this.id}/$path');
 	}
 
 	override public function new(id:String) {
@@ -78,7 +78,7 @@ class Character extends Bopper {
 	public function loadSparrowCharacter() {
 		final imageName = metadata.imageName ?? 'atlas';
 
-		this.frames = FlxAtlasFrames.fromSparrow(getPath('$imageName${Constants.EXT_PNG}'), getPath('$imageName${Constants.EXT_XML}'));
+		this.frames = AssetPaths.fromSparrow('characters/${this.id}/$imageName');
 
 		if (metadata.animations == null) {
 			DebugLogger.error('Character "${this.id}" is missing the metadata "animations" field.');

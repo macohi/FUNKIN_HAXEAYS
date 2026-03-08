@@ -81,20 +81,16 @@ class PlayState extends MusicBeatState {
 		camGame.follow(camFollow, LOCKON, 0.04);
 		camGame.focusOn(camFollow.getPosition());
 
-		conductor.bpm = song.startingBPM;
+		conductor.reset(song.startingBPM);
 		conductor.time = conductor.crotchet * -5;
 
-		countdown = new CountdownSprite();
-		add(countdown);
-		countdown.display('ready glow');
-		countdown.cameras = [camHUD];
-		countdown.screenCenter();
+		remakeCountdown();
 
 		FlxG.sound.play(Constants.SFX_SCROLLMENU);
 
 		refresh();
 
-		if (song.metadata == null) {
+		if (song.metadata == null || audioFiles.length < 1) {
 			endSong();
 			return;
 		}
@@ -102,6 +98,18 @@ class PlayState extends MusicBeatState {
 		scriptCall('onSongLoaded');
 
 		// persistentUpdate = true;
+	}
+
+	public function remakeCountdown() {
+		try {
+			countdown = new CountdownSprite();
+			add(countdown);
+			countdown.display('ready glow');
+			countdown.cameras = [camHUD];
+			countdown.screenCenter();
+		} catch (e) {
+			trace(e);
+		}
 	}
 
 	override public function update(elapsed:Float) {
@@ -120,19 +128,15 @@ class PlayState extends MusicBeatState {
 			if (!paused)
 				checkSongTime();
 
-			if (FlxG.keys.justReleased.ENTER) {
-				if (songStarted)
-					pause();
-			}
-
-			if (FlxG.keys.justReleased.ESCAPE) {
-				if (!songStarted)
-					endSong();
-			}
+			if (FlxG.keys.justReleased.ENTER && songStarted)
+				pause();
 		} else {
 			if (FlxG.keys.justReleased.ENTER)
 				onSongLoading();
 		}
+
+		if (FlxG.keys.justReleased.ESCAPE)
+			endSong();
 
 		camGame.zoom = cameraZoom;
 	}
@@ -189,6 +193,9 @@ class PlayState extends MusicBeatState {
 
 		countdownBeathit = function(beat) {
 			if (beat < 1) {
+				if (countdown.anim == null)
+					remakeCountdown();
+
 				switch (beat) {
 					case 0:
 						remove(countdown);

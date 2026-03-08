@@ -18,8 +18,8 @@ class VSliceSongChart {
 		var metadata:VSliceMetadata;
 		var chart:VSliceChart;
 
-		final chartPath = 'assets/songs/$song/chart/$song-chart${Constants.EXT_SONG_CHART}';
-		final metadataPath = 'assets/songs/$song/chart/$song-metadata${Constants.EXT_SONG_CHART}';
+		final chartPath = AssetPaths.path('songs/$song/chart/$song-chart${Constants.EXT_SONG_CHART}');
+		final metadataPath = AssetPaths.path('songs/$song/chart/$song-metadata${Constants.EXT_SONG_CHART}');
 
 		trace(' * chart: ${chartPath}');
 		trace(' * metadata: ${metadataPath}');
