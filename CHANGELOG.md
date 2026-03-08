@@ -1,3 +1,15 @@
+# 0.3.0 - (3/8/2026)
+- feat: Added SPAGHETTI!
+    - fix: `CountdownSprite` is now imported in scripts
+    - feat: `PerspectiveSprite`
+    - fix: At the start of the song the camera points at the middle of the opponent
+    - feat: `addProp` stage script function
+    - chore: Split `loadVSliceChart` into `parseVSliceChart` and `loadVSliceChart`
+        - `parseVSliceChart` gives the VSlice chart note and event data
+        - `loadVSliceChart` uses `parseVSliceChart` and makes the events according to the data its given
+    - feat: SserafimShader
+    - refactor: `dadbattle` is now hardcoded into the base songList to be after fresh and never to be after new songs
+
 # 0.2.0 - (3/8/2026)
 - fix: Pause Screen BG fits the screen when the game camera is zoomed out
 - fix: VSlice FocusCamera camera tweens cancel previous ones when active (this applies to ZoomCamera too)

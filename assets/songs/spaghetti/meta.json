@@ -1,0 +1,17 @@
+{
+    "name": "SPAGHETTI (feat. j-hope of BTS) (Clean)",
+    "artist": "LE SSERAFIM (feat. j-hope)",
+    
+    "startingBPM": 111.5,
+    
+    "songFiles": [
+        "Inst",
+        "Voices-sserafim-sakura"
+    ],
+
+    "player": "bf",
+    "damsel": "gf",
+    "opponent": "dad",
+    
+    "stage": "sserafim"
+}

@@ -1,0 +1,15 @@
+var perspectiveFloor:PerspectiveSprite = null;
+
+function buildStage()
+{
+    perspectiveFloor = new PerspectiveSprite();
+    perspectiveFloor.sprite.loadGraphic(stage.getPath('props/floor' + Constants.EXT_PNG));
+    perspectiveFloor.setPositions(760, 1375, 790, 625);
+    perspectiveFloor.setScrollFactors(1.05, 1.05, 0.93, 0.93);
+
+    perspectiveFloor.zIndex = 11;
+
+    stage.propIdtoObj.set('perspectiveFloor', perspectiveFloor);
+    stage.add(perspectiveFloor);
+    stage.refresh();
+}

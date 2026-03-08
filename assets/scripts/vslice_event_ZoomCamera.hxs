@@ -19,7 +19,7 @@ function vslice_addevent_ZoomCamera(v:Dynamic, t:Float) {
 
     if ((StringTools.endsWith(ease, 'In') || StringTools.endsWith(ease, 'Out') || StringTools.endsWith(ease, 'InOut')) || ease == "linear") easeDir = "";
 
-	zoom = zoom * (isDirectMode ? FlxCamera.defaultZoom : 1.0);
+	  zoom = zoom * (isDirectMode ? FlxCamera.defaultZoom : 1.0);
 
     // If it's a string, check the value.
     switch (ease)

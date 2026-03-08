@@ -76,6 +76,9 @@ class PlayState extends MusicBeatState {
 			stage = new Stage(song.metadata);
 
 			add(stage);
+
+			if (stage.opponent != null)
+				camFollow.setPosition(stage.opponent.getGraphicMidpoint().x, stage.opponent.getGraphicMidpoint().y,);
 		}
 
 		camGame.follow(camFollow, LOCKON, 0.04);
@@ -178,6 +181,7 @@ class PlayState extends MusicBeatState {
 	public function startSong() {
 		song.playAudio();
 		songStarted = true;
+
 		scriptCall('onSongStarted');
 	}
 
@@ -320,7 +324,9 @@ class PlayState extends MusicBeatState {
 		scriptCall('sectionHit', [section]);
 	}
 
-	public function loadVSliceChart(diff:String, song:String) {
+	public function parseVSliceChart(diff:String, song:String)
+		return VSliceSongChart.parseVSliceChart(diff, song);
+
+	public function loadVSliceChart(diff:String, song:String)
 		VSliceSongChart.loadVSliceChart(diff, song);
-	}
 }

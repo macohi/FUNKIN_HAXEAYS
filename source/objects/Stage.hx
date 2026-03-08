@@ -89,7 +89,9 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 			return new StageScript(this.id, s);
 		});
 
+		scriptSet('stage', this);
 		scriptSet('getNamedProp', getNamedProp);
+
 		scriptSet('player', player);
 		scriptSet('damsel', damsel);
 		scriptSet('opponent', opponent);
@@ -133,6 +135,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 	}
 
 	public function parseImageProp(prop:StagePropData) {
+
 		var image:AYSSprite = new AYSSprite();
 
 		if (prop.assetPath != null)
@@ -144,6 +147,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		add(image);
 		propIdtoObj.set(prop.id, image);
+		scriptCall('addSpriteProp', [image, prop.assetType, prop.id]);
 	}
 
 	public function parseSolidProp(prop:StagePropData) {
@@ -157,6 +161,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		add(solid);
 		propIdtoObj.set(prop.id, solid);
+		scriptCall('addSpriteProp', [solid, prop.assetType, prop.id]);
 	}
 
 	public function parseSparrowProp(prop:StagePropData) {
@@ -181,6 +186,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		add(sparrow);
 		propIdtoObj.set(prop.id, sparrow);
+		scriptCall('addSpriteProp', [sparrow, prop.assetType, prop.id]);
 	}
 
 	public function applyConstPropValues(prop:StagePropData, spr:AYSSprite) {

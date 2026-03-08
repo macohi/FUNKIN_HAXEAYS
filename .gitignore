@@ -2,5 +2,7 @@ export/
 .haxelib/
 dump/
 
+.dev/funkin/
+
 .DS_Store
 RECOVER_**.fla

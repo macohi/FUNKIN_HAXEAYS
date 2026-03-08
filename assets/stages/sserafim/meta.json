@@ -1,0 +1,327 @@
+{
+    "zoom": 0.5,
+    "characters": {
+        "player": {
+            "zIndex": 300,
+            "position": [
+                1530,
+                970
+            ],
+            "scroll": [
+                0.99,
+                0.99
+            ],
+            "cameraOffsets": [
+                -100,
+                -100
+            ]
+        },
+        "opponent": {
+            "zIndex": 200,
+            "position": [
+                70,
+                470
+            ],
+            "scroll": [
+                0.97,
+                0.97
+            ],
+            "cameraOffsets": [
+                150,
+                -100
+            ]
+        },
+        "damsel": {
+            "zIndex": 300,
+            "cameraOffsets": [
+                0,
+                0
+            ],
+            "scroll": [
+                0.95,
+                0.95
+            ],
+            "position": [
+                938.5,
+                392
+            ]
+        }
+    },
+    "props": [
+        {
+            "id": "solid",
+            "assetType": "solid",
+            "color": "#FFFFFF",
+            "position": [
+                -5000,
+                -3000
+            ],
+            "scale": [
+                10000,
+                10000
+            ],
+            "scroll": [
+                0,
+                0
+            ]
+        },
+        {
+            "id": "solidCover",
+            "zIndex": 9999,
+            "alpha": 0.0,
+            "assetType": "solid",
+            "color": "#000000",
+            "position": [
+                -5000,
+                -3000
+            ],
+            "scale": [
+                10000,
+                10000
+            ],
+            "scroll": [
+                0,
+                0
+            ]
+        },
+        {
+            "zIndex": 10,
+            "position": [
+                -1853,
+                -815
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "bg",
+            "assetPath": "bg",
+            "scroll": [
+                0.75,
+                0.75
+            ]
+        },
+        {
+            "alpha": 0.0,
+            "zIndex": 10,
+            "position": [
+                790,
+                625
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "fucker",
+            "assetPath": "floor",
+            "scroll": [
+                0.85,
+                0.85
+            ]
+        },
+        {
+            "zIndex": 12,
+            "position": [
+                -1857,
+                267
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "backTables",
+            "assetPath": "back-tables",
+            "scroll": [
+                0.93,
+                0.93
+            ]
+        },
+        {
+            "zIndex": 12,
+            "position": [
+                -1858,
+                377
+            ],
+            "scale": [
+                400,
+                1
+            ],
+            "assetType": "image",
+            "id": "backTablesCutscene",
+            "assetPath": "cutscene/counter-stretch",
+            "scroll": [
+                0.93,
+                0.93
+            ]
+        },
+        {
+            "zIndex": 13,
+            "position": [
+                -97,
+                237
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "burgerCutscene",
+            "assetPath": "cutscene/burger-cutscene",
+            "scroll": [
+                0.93,
+                0.93
+            ]
+        },
+        {
+            "zIndex": 14,
+            "position": [
+                -1357,
+                426
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "backStools",
+            "assetPath": "back-stools",
+            "scroll": [
+                0.94,
+                0.94
+            ]
+        },
+        {
+            "zIndex": 17,
+            "alpha": 0.0,
+            "position": [
+                -1241,
+                -949
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "backLightColor",
+            "assetPath": "lights/back-light-color",
+            "scroll": [
+                0.93,
+                0.93
+            ]
+        },
+        {
+            "zIndex": 18,
+            "alpha": 0.0,
+            "position": [
+                -771,
+                -599
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "backLightWhite",
+            "assetPath": "lights/back-light-white",
+            "scroll": [
+                0.93,
+                0.93
+            ]
+        },
+        {
+            "zIndex": 20,
+            "position": [
+                -983,
+                -707
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "truck",
+            "assetPath": "truck-stuff",
+            "scroll": [
+                0.95,
+                0.95
+            ]
+        },
+        {
+            "zIndex": 21,
+            "position": [
+                -980,
+                -173
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "truckDoor",
+            "assetPath": "truck-door",
+            "scroll": [
+                0.95,
+                0.95
+            ]
+        },
+        {
+            "alpha": 0.0,
+            "zIndex": 23,
+            "position": [
+                -962,
+                -607
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "truckLight1",
+            "assetPath": "lights/truck-light1",
+            "scroll": [
+                0.95,
+                0.95
+            ]
+        },
+        {
+            "alpha": 0.0,
+            "zIndex": 22,
+            "position": [
+                -781,
+                -464
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "truckLight2",
+            "assetPath": "lights/truck-light2",
+            "scroll": [
+                0.95,
+                0.95
+            ]
+        },
+        {
+            "zIndex": 1500,
+            "position": [
+                -280,
+                818
+            ],
+            "scale": [
+                1,
+                1
+            ],
+            "assetType": "image",
+            "id": "frontStool",
+            "assetPath": "front-stool",
+            "scroll": [
+                1.0,
+                1.0
+            ]
+        }
+    ]
+}

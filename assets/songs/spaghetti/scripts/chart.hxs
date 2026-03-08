@@ -1,0 +1,92 @@
+function onSongLoaded() {
+	var chart_yunjin:Dynamic = PlayState.instance.parseVSliceChart('yunjin', 'spaghetti');
+	var chart_kazuha:Dynamic = PlayState.instance.parseVSliceChart('kazuha', 'spaghetti');
+	var chart_chaewon:Dynamic = PlayState.instance.parseVSliceChart('chaewon', 'spaghetti');
+	var chart_eunchae:Dynamic = PlayState.instance.parseVSliceChart('eunchae', 'spaghetti');
+	var chart_sakura:Dynamic = PlayState.instance.parseVSliceChart('sakura', 'spaghetti');
+	var chart_gf:Dynamic = PlayState.instance.parseVSliceChart('gf', 'spaghetti');
+
+	for (event in chart_sakura.events)
+		ScriptManager.generalScriptHolder.scriptCall('vslice_addevent_' + event.e, [event.v, event.t]);
+
+	saveNotes(chart_yunjin.notes, 3, function(n) {
+		trace('y: ' + n);
+	});
+
+	saveNotes(chart_kazuha.notes, 0);
+
+	saveNotes(chart_chaewon.notes, 3, function(n) {
+		trace('c: ' + n);
+	});
+
+	saveNotes(chart_eunchae.notes, 3, function(n) {
+		trace('e: ' + n);
+	});
+
+	saveNotes(chart_sakura.notes, 3, function(n) {
+		if (n.k == 'sakura-joint') // both sing
+		{
+			trace('sb: ' + n);
+		} else if (n.k == 'sakura-bf1') // bf only
+		{
+			trace('b1: ' + n);
+		} else if (n.k == 'sakura-bf2') // bf only (but alt)
+		{
+			trace('b2: ' + n);
+		} else // sakura
+		{
+			trace('s: ' + n);
+		}
+	});
+
+	saveNotes(chart_gf.notes, 2);
+}
+
+function saveNotes(notes:Array<Dynamic>, char:Int = 0, ?charFunc:Dynamic->Void = null) {
+	var holdOffset:Float = Constants.MS_PER_SEC / 10;
+	for (note in notes) {
+		var funcNote = {
+			t: note.t,
+			l: note.l ?? 0,
+			d: note.d,
+			k: note.k ?? null,
+		};
+
+		if (note.l > 0) {
+			var l = 0.0;
+
+			while (note.l > 0) {
+				funcNote.t = note.t + l;
+				addNote(funcNote, char, charFunc);
+
+				note.l -= holdOffset;
+				l += holdOffset;
+			}
+		} else
+			addNote(funcNote, char, charFunc);
+	}
+}
+
+function addNote(n:Dynamic, char:Int, charFunc:Dynamic->Void) {
+	if (char >= 0 && char <= 2)
+		PlayState.instance.addEventObject(new SongCharacterAnimationEvent(n.t, getNoteSingDir(n.d), char));
+	else
+		PlayState.instance.addEventObject(new SongEvent(n.t, function() {
+			charFunc(n);
+		}));
+}
+
+function getNoteSingDir(d:Int) {
+	switch (d % 4) {
+		case 0:
+			return 'singLEFT';
+		case 1:
+			return 'singDOWN';
+		case 2:
+			return 'singUP';
+		case 3:
+			return 'singRIGHT';
+	}
+
+	return '';
+}

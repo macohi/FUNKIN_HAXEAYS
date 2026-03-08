@@ -1,9 +1,6 @@
 package data.song.charts;
 
 import scripting.ScriptManager;
-import objects.ScriptHolder;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import objects.SongChartNoteEvent;
 import haxe.Json;
 import debugging.DebugLogger;
@@ -12,8 +9,8 @@ import data.song.charts.VSliceSongData;
 import states.PlayState;
 
 class VSliceSongChart {
-	public static function loadVSliceChart(difficulty:String, song:String) {
-		trace('Loading VSlice song');
+	public static function parseVSliceChart(difficulty:String, song:String) {
+		trace('Loading VSlice song (difficulty: $difficulty)');
 
 		var metadata:VSliceMetadata;
 		var chart:VSliceChart;
@@ -26,19 +23,19 @@ class VSliceSongChart {
 
 		if (!Assets.exists(chartPath)) {
 			DebugLogger.error('Non-existant VSlice song chart path: ${chartPath}');
-			return;
+			return null;
 		}
 
 		if (!Assets.exists(metadataPath)) {
 			DebugLogger.error('Non-existant VSlice song metadata path: ${metadataPath}');
-			return;
+			return null;
 		}
 
 		try {
 			metadata = Json.parse(Assets.getText(metadataPath));
 		} catch (e) {
 			DebugLogger.error('Error loading VSlice song metadata (${metadataPath}): $e');
-			return;
+			return null;
 		}
 
 		if (metadata == null)
@@ -48,7 +45,7 @@ class VSliceSongChart {
 			chart = Json.parse(Assets.getText(chartPath));
 		} catch (e) {
 			DebugLogger.error('Error loading VSlice song chart (${chartPath}): $e');
-			return;
+			return null;
 		}
 
 		if (chart == null)
@@ -57,22 +54,45 @@ class VSliceSongChart {
 		if (chart.notes == null)
 			DebugLogger.error('Error loading VSlice song metadata (${metadataPath}): Null notes field');
 
-		for (event in chart.events) {
-			switch (event.e) {
-				default:
-					ScriptManager.generalScriptHolder?.scriptCall('vslice_addevent_${event.e}', [event.v, event.t]);
-			}
-		}
+		var events:Array<VSliceChartEvent> = [];
+		var notes:Array<VSliceChartNote> = [];
+
+		for (event in chart.events)
+			events.push(event);
 
 		var difficultyNotes:Array<VSliceChartNote> = Reflect.field(chart.notes, difficulty);
 
 		if (difficultyNotes == null) {
 			DebugLogger.error('Missing VSlice song chart (${chartPath}) difficulty: $difficulty');
-			return;
+			return null;
 		}
 
+		for (note in difficultyNotes)
+			notes.push(note);
+
+		return {
+			events: events,
+			notes: notes,
+		};
+	}
+
+	public static function loadVSliceChart(difficulty:String, song:String) {
+		var parsedVSlice = parseVSliceChart(difficulty, song);
+
+		if (parsedVSlice == null)
+			return;
+
+		var events:Array<VSliceChartEvent> = parsedVSlice.events;
+		var notes:Array<VSliceChartNote> = parsedVSlice.notes;
+
+		for (event in events)
+			switch (event.e) {
+				default:
+					ScriptManager.generalScriptHolder?.scriptCall('vslice_addevent_${event.e}', [event.v, event.t]);
+			}
+
 		final holdOffset:Float = Constants.MS_PER_SEC / 10;
-		for (note in difficultyNotes) {
+		for (note in notes) {
 			var direction = '';
 
 			switch (note.d % 4) {
@@ -86,9 +106,9 @@ class VSliceSongChart {
 					direction = 'right';
 			}
 
-			var l = 0.0;
-
 			if (note.l > 0) {
+				var l = 0.0;
+
 				while (note.l > 0) {
 					PlayState.instance.addEventObject(new SongChartNoteEvent(note.t + l, direction, (Math.floor(note.d / 4) < 1 ? 1 : 0)));
 
