@@ -1,4 +1,6 @@
 # 0.2.0 - (3/8/2026)
+- fix: The cursor is now invisible
+
 - feat: Pause menu now displays the song name and composer / artist
 - feat: Added Bopeebo (erect)
 
