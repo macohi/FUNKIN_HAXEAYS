@@ -80,6 +80,9 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 			if (metadata.characters != null && PlayState.instance != null)
 				parseCharactersField();
+
+			if (metadata.zoom != null)
+				PlayState.instance.cameraZoom = metadata.zoom;
 		}
 
 		scriptFiles = ScriptManager.readScriptFolder(getPath('scripts'), function(s) {

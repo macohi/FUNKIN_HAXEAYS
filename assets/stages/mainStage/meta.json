@@ -1,4 +1,6 @@
 {
+    "zoom": 0.9,
+
     "characters": {
         "player": {
             "position": [
