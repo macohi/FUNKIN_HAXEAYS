@@ -226,7 +226,7 @@ class PlayState extends MusicBeatState {
 
 				if (beat < 0) {
 					FlxTween.cancelTweensOf(countdown);
-					FlxTween.tween(countdown, {alpha: 0}, Conductor.instance.crotchet, {
+					FlxTween.tween(countdown, {alpha: 0}, Conductor.instance.crotchet / Constants.MS_PER_SEC, {
 						ease: FlxEase.sineInOut
 					});
 				}
