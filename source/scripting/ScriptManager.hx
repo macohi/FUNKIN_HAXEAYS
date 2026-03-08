@@ -1,5 +1,6 @@
 package scripting;
 
+import crowplexus.iris.Iris;
 import data.song.charts.VSliceSongChart;
 import sys.FileSystem;
 import data.*;
@@ -9,9 +10,12 @@ import states.*;
 import substates.*;
 import shaders.*;
 
+using StringTools;
+
 class ScriptManager {
 	// alot yoinked from mobmod hehehehehaw
 	public static var defaultVariables:Map<String, Dynamic> = [
+		// misc related stuff
 		// Haxe related stuff
 		'Std' => Std,
 		'Math' => Math,
@@ -98,8 +102,10 @@ class ScriptManager {
 				scripts.push(baseScript);
 			}
 		} catch (e) {
-
-			trace(' * Error reading script folder : $e');
+			if (e.toString().contains(Constants.EXT_HSCRIPT))
+				Iris.error('$e');
+			else
+				trace(' * Error reading script folder : $e');
 			scripts = [];
 		}
 

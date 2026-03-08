@@ -1,4 +1,8 @@
 # 0.2.0 - (3/8/2026)
+- feat: VSlice "ZoomCamera" event support
+    - refactor: Script errors are now traced via `Iris.error` (it makes it more noticable, if your pc supports ansi anyway...)
+    - fix: Iris no longer complains about object casting for traces
+
 - feat: `cameraOffsets` stage character info field
 - feat: mainStageErect BG
     - feat: `player`, `damsel`, and `opponent` stage script variables

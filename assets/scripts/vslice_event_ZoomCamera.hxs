@@ -1,0 +1,56 @@
+
+var DEFAULT_ZOOM:Float = 1.0;
+var DEFAULT_DURATION:Float = 4.0;
+var DEFAULT_MODE:String = 'direct';
+
+function vslice_addevent_ZoomCamera(v:Dynamic, t:Float) {
+	if (v == null)
+		return;
+
+	trace(v);
+
+    var zoom:Float = v.zoom ?? DEFAULT_ZOOM;
+
+    var duration:Float = v.duration ?? DEFAULT_DURATION;
+
+    var mode:String = v.mode ?? DEFAULT_MODE;
+    var isDirectMode:Bool = mode == 'direct';
+
+    var ease:String = v.ease ?? 'linear';
+    var easeDir:String = v.easeDir ?? 'In';
+
+    if ((StringTools.endsWith(ease, 'In') || StringTools.endsWith(ease, 'Out') || StringTools.endsWith(ease, 'InOut')) || ease == "linear") easeDir = "";
+
+	zoom = zoom * (isDirectMode ? FlxCamera.defaultZoom : 1.0);
+
+    // If it's a string, check the value.
+    switch (ease)
+    {
+      case 'INSTANT':
+		PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+			PlayState.instance.cameraZoom = zoom;
+		});
+
+      default:
+        var durSeconds = (Conductor.instance.quaver * duration) / Constants.MS_PER_SEC;
+        var easeFunctionName = ease + easeDir;
+        var easeFunction:Null<Float->Float> = Reflect.field(FlxEase, easeFunctionName);
+
+        if (easeFunction == null)
+        {
+			trace('Invalid ease function: ' + easeFunctionName);
+		
+			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+				FlxTween.tween(PlayState.instance, {cameraZoom: zoom}, durSeconds);
+			});
+
+          	return;
+        }
+
+		PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+			FlxTween.tween(PlayState.instance, {cameraZoom: zoom}, durSeconds, {
+				ease: easeFunction
+			});
+		});
+    }
+}
