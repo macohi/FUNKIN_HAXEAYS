@@ -55,8 +55,12 @@ class VSliceSongChart {
 			DebugLogger.error('Error loading VSlice song metadata (${metadataPath}): Null notes field');
 
 		for (event in chart.events) {
-			if (event.e == 'FocusCamera')
-				event_FocusCamera(event.v, event.t);
+			switch (event.e) {
+				case 'FocusCamera':
+					event_FocusCamera(event.v, event.t);
+				default:
+					PlayState.instance.scriptCall('vslice_addevent_${event.e}', [event.v, event.t]);
+			}
 		}
 
 		var difficultyNotes:Array<VSliceChartNote> = Reflect.field(chart.notes, difficulty);
