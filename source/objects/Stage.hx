@@ -169,6 +169,9 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 					sparrow.addPrefixAnimation(a.name, a.prefix, a.fps ?? 24, a.looped ?? false);
 			}
 
+		if (prop.startingAnimation != null)
+			sparrow.playAnim(prop.startingAnimation);
+
 		applyConstPropValues(prop, sparrow);
 
 		trace(' * sparrow: ${prop.id}');
