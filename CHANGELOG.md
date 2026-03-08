@@ -28,7 +28,7 @@
 
 - fix: The flixel cursor is now invisible (it uses your system cursor now)
 
-- feat: Pause menu now displays the song name and composer / artist
+- feat: Pause menu now displays the song name, composer / artist, and song time left
 - feat: Added Bopeebo (erect)
 
 - fix: The song countdown now fades correctly

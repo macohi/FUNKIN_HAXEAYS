@@ -1,5 +1,6 @@
 package substates;
 
+import flixel.math.FlxMath;
 import states.SongSelectState;
 import flixel.FlxCamera;
 import flixel.FlxObject;
@@ -79,8 +80,12 @@ class PauseSubState extends MusicBeatSubState {
 		watermark.alpha = 0;
 		watermark.cameras = [pauseCam];
 
+		final curTime = FlxMath.roundDecimal(Conductor.instance.time / Constants.MS_PER_SEC, 2);
+		final totalTime = FlxMath.roundDecimal((PlayState.instance.audioFiles[0].length) / Constants.MS_PER_SEC, 2);
+
 		watermark.text = 'Song: ${PlayState.instance.song.name}\n';
 		watermark.text += 'Artist: ${PlayState.instance.song.artist}\n';
+		watermark.text += '\nTime Left: ${totalTime - curTime}s\n';
 
 		FlxTween.tween(watermark, {alpha: 1}, 0.6, {ease: FlxEase.sineInOut});
 	}
