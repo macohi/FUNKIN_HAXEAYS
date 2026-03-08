@@ -26,4 +26,4 @@ Step-by-step on compiling from source code:
 
 ## Modding
 
-Use the Dadbattle built-in mod as an example, explaning this would kill my motivation, sorry :'(
+Use the Dadbattle built-in mod as an example, explaining this would kill my motivation, sorry :'(
