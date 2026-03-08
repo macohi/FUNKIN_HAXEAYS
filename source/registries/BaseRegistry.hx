@@ -39,9 +39,10 @@ class BaseRegistry<T> {
 				assets.push(getPath(a));
 
 			for (mod in ModCore.instance.enabledMods)
-				for (a in sys.FileSystem.readDirectory(getPath('').replace('assets/', 'mods/${mod}/')) ?? [])
-					assets.push(getPath(a).replace('assets/', 'mods/${mod}/'));
-
+				try {
+					for (a in sys.FileSystem.readDirectory(getPath('').replace('assets/', 'mods/${mod}/')) ?? [])
+						assets.push(getPath(a).replace('assets/', 'mods/${mod}/'));
+				} catch (e) {}
 		} catch (e) {
 			error(e, 'Registry($id) Error');
 		}
