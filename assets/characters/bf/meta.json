@@ -3,7 +3,7 @@
     "imageName": "atlas",
     "cameraOffsets": [
         -150,
-        -150
+        -100
     ],
     "animations": [
         {
