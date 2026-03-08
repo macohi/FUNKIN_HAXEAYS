@@ -91,6 +91,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		scriptSet('stage', this);
 		scriptSet('getNamedProp', getNamedProp);
+		scriptSet('addProp', addProp);
 
 		scriptSet('player', player);
 		scriptSet('damsel', damsel);
@@ -99,10 +100,14 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 		scriptCall('buildStage');
 	}
 
+	public function addProp(id:String, prop:FlxBasic) {
+		add(prop);
+		propIdtoObj.set(id, prop);
+	}
+
 	public var propIdtoObj:Map<String, FlxBasic> = [];
 
-	public function getNamedProp(id:String):FlxBasic
-	{
+	public function getNamedProp(id:String):FlxBasic {
 		if (propIdtoObj.exists(id))
 			return propIdtoObj.get(id);
 
@@ -135,7 +140,6 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 	}
 
 	public function parseImageProp(prop:StagePropData) {
-
 		var image:AYSSprite = new AYSSprite();
 
 		if (prop.assetPath != null)
@@ -145,8 +149,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		trace(' * image: ${prop.id}');
 
-		add(image);
-		propIdtoObj.set(prop.id, image);
+		addProp(prop.id, image);
 		scriptCall('addSpriteProp', [image, prop.assetType, prop.id]);
 	}
 
@@ -159,8 +162,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		trace(' * solid: ${prop.id}');
 
-		add(solid);
-		propIdtoObj.set(prop.id, solid);
+		addProp(prop.id, solid);
 		scriptCall('addSpriteProp', [solid, prop.assetType, prop.id]);
 	}
 
@@ -171,8 +173,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 			sparrow.frames = AssetPaths.fromSparrow('stages/${this.id}/props/${prop.assetPath}');
 
 		if (prop.animations != null)
-			for (a in prop.animations)
-			{
+			for (a in prop.animations) {
 				if (a.type == prefix)
 					sparrow.addPrefixAnimation(a.name, a.prefix, a.fps ?? 24, a.looped ?? false);
 			}
@@ -184,8 +185,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 		trace(' * sparrow: ${prop.id}');
 
-		add(sparrow);
-		propIdtoObj.set(prop.id, sparrow);
+		addProp(prop.id, sparrow);
 		scriptCall('addSpriteProp', [sparrow, prop.assetType, prop.id]);
 	}
 
@@ -221,8 +221,7 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 			applyConstPropValues(cast charData, playStateChar);
 
-			if (charData.cameraOffsets != null)
-			{
+			if (charData.cameraOffsets != null) {
 				playStateChar.cameraOffsets[0] += charData.cameraOffsets[0] ?? 0;
 				playStateChar.cameraOffsets[1] += charData.cameraOffsets[1] ?? 0;
 			}

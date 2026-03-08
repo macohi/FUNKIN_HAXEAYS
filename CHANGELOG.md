@@ -1,9 +1,10 @@
 # 0.3.0 - (3/8/2026)
-- feat: Added SPAGHETTI!
+- feat: `addProp` stage script function
+
+- chore: spaghetti was in the works but got scrapped
     - fix: `CountdownSprite` is now imported in scripts
     - feat: `PerspectiveSprite`
     - fix: At the start of the song the camera points at the middle of the opponent
-    - feat: `addProp` stage script function
     - chore: Split `loadVSliceChart` into `parseVSliceChart` and `loadVSliceChart`
         - `parseVSliceChart` gives the VSlice chart note and event data
         - `loadVSliceChart` uses `parseVSliceChart` and makes the events according to the data its given
