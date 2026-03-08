@@ -34,8 +34,6 @@ class Character extends Bopper {
 
 		scriptHolder = new ScriptHolder();
 
-		cameraFollowPoint = new FlxPoint();
-
 		if (!CharacterRegistry.instance.data.exists(id)) {
 			DebugLogger.error('Character ${this.id} is missing their metadata file');
 			return;
@@ -48,10 +46,8 @@ class Character extends Bopper {
 
 		scriptFiles = ScriptManager.readScriptFolder(getPath('scripts'), function(s) {
 			return new CharacterScript(this.id, s);
-		});
+		});		
 	}
-
-	public var cameraFollowPoint:FlxPoint = new FlxPoint(0, 0);
 
 	public function loadCharacter() {
 		trace('Loading character: ${this.id}');
@@ -67,7 +63,6 @@ class Character extends Bopper {
 				DebugLogger.error('Character "${this.id}" has an unknown or unsupported asset type: ${metadata.type}');
 		}
 
-		cameraFollowPoint.set(this.getGraphicMidpoint().x, this.getGraphicMidpoint().y);
 
 		animationOffsets.clear();
 		applyGeneralOffsets();

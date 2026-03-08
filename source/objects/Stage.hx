@@ -1,5 +1,6 @@
 package objects;
 
+import states.PlayState;
 import registries.StageRegistry;
 import data.song.SongMetaData;
 import data.stage.StagePropData;

@@ -1,0 +1,18 @@
+{
+    "name": "Fresh",
+    "artist": "Kawai Sprite",
+    
+    "startingBPM": 120,
+    
+    "songFiles": [
+        "Inst",
+        "Voices-bf",
+        "Voices-dad"
+    ],
+
+    "player": "bf",
+    "damsel": "gf",
+    "opponent": "dad",
+    
+    "stage": "mainStage"
+}

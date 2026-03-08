@@ -1,3 +1,4 @@
+import states.PlayState;
 import registries.StageRegistry;
 import registries.CharacterRegistry;
 import registries.SongRegistry;
@@ -37,6 +38,6 @@ class InitState extends FlxState {
 			}
 		});
 
-		FlxG.switchState(() -> new PlayState());
+		FlxG.switchState(() -> new states.SongSelectState());
 	}
 }

@@ -1,4 +1,4 @@
-package;
+package states;
 
 import data.song.charts.VSliceSongChart;
 import objects.SongEvent;
@@ -37,6 +37,14 @@ class PlayState extends MusicBeatState {
 
 	public var events:Array<SongEvent> = [];
 
+	private var songID:String = 'urmom';
+
+	override public function new(?songID:String) {
+		super();
+
+		this.songID = songID;
+	}
+
 	override public function create() {
 		super.create();
 
@@ -57,7 +65,7 @@ class PlayState extends MusicBeatState {
 		@:privateAccess
 		FlxCamera._defaultCameras = [camGame];
 
-		song = new Song('bopeebo');
+		song = new Song(songID);
 
 		if (song.stage != null) {
 			stage = new Stage(song.metadata);
@@ -74,6 +82,11 @@ class PlayState extends MusicBeatState {
 		songLoaded = true;
 		refresh();
 		scriptCall('onSongLoaded');
+
+		if (song.metadata == null) {
+			endSong();
+			return;
+		}
 	}
 
 	public var focusLostPause:Bool = false;
@@ -85,9 +98,13 @@ class PlayState extends MusicBeatState {
 		paused = !paused;
 
 		if (paused) {
+			scriptCall('onPause');
+			
 			conductorTimeBeforePause = conductor.time;
 			song.pauseAudio();
 		} else {
+			scriptCall('onUnpause');
+
 			conductor.time = conductorTimeBeforePause;
 
 			for (a in audioFiles)
@@ -103,7 +120,10 @@ class PlayState extends MusicBeatState {
 		scriptCall('onSongStarted');
 	}
 
-	public function endSong() {}
+	public function endSong() {
+		scriptCall('onSongEnd');
+		FlxG.switchState(() -> new SongSelectState());
+	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
@@ -142,7 +162,7 @@ class PlayState extends MusicBeatState {
 
 		// End the song if the time has come...
 		// Doing this normally has a problem unfortunately :(
-		if (conductor.time >= audioFiles[0].length) {
+		if (conductor.time >= audioFiles[0].length || audioFiles.length < 1) {
 			endSong();
 			return;
 		}

@@ -9,6 +9,7 @@ import haxe.Json;
 import debugging.DebugLogger;
 import lime.utils.Assets;
 import data.song.charts.VSliceSongData;
+import states.PlayState;
 
 class VSliceSongChart {
 	public static function loadVSliceChart(difficulty:String, song:String) {

@@ -29,15 +29,25 @@ function vslice_addevent_FocusCamera(v:Dynamic, t:Float) {
 			return;
 	}
 
-	var char:Int = v.char;
+	var char:Int = 0;
 
-	var xOffset:Float = v.x;
-	var yOffset:Float = v.y;
+	var xOffset:Float = 0;
+	var yOffset:Float = 0;
 
-	var duration:Float = v.duration;
+	var duration:Float = 0;
 
-	var ease:String = v.ease;
-	var easeDir:String = v.easeDir;
+	var ease:String = '';
+	var easeDir:String = '';
+	
+	if (v.char != null) char = v.char;
+
+	if (v.x != null) xOffset += v.x;
+	if (v.t != null) xOffset += v.t;
+
+	if (v.duration != null) duration += v.duration;
+
+	if (v.ease != null) ease = v.ease;
+	if (v.easeDir != null) easeDir = v.easeDir;
 
 	var targetX = xOffset;
 	var targetY = yOffset;
@@ -48,22 +58,25 @@ function vslice_addevent_FocusCamera(v:Dynamic, t:Float) {
 
 		case 0:
 			if (PlayState.instance.stage.player != null) {
-				targetX += PlayState.instance.stage.player.cameraFollowPoint.x;
-				targetY += PlayState.instance.stage.player.cameraFollowPoint.y;
+				targetX += PlayState.instance.stage.player.getGraphicMidpoint().x;
+				targetY += PlayState.instance.stage.player.getGraphicMidpoint().y;
 			}
 
 		case 1:
 			if (PlayState.instance.stage.opponent != null) {
-				targetX += PlayState.instance.stage.opponent.cameraFollowPoint.x;
-				targetY += PlayState.instance.stage.opponent.cameraFollowPoint.y;
+				targetX += PlayState.instance.stage.opponent.getGraphicMidpoint().x;
+				targetY += PlayState.instance.stage.opponent.getGraphicMidpoint().y;
 			}
 
 		case 2:
 			if (PlayState.instance.stage.damsel != null) {
-				targetX += PlayState.instance.stage.damsel.cameraFollowPoint.x;
-				targetY += PlayState.instance.stage.damsel.cameraFollowPoint.y;
+				targetX += PlayState.instance.stage.damsel.getGraphicMidpoint().x;
+				targetY += PlayState.instance.stage.damsel.getGraphicMidpoint().y;
 			}
 	}
+
+	if (v.ease == null)
+		ease = 'CLASSIC';
 
 	switch (ease) {
 		case 'CLASSIC':
@@ -76,21 +89,27 @@ function vslice_addevent_FocusCamera(v:Dynamic, t:Float) {
 				PlayState.instance.camGame.focusOn(PlayState.instance.camFollow.getPosition());
 			});
 		default:
-			var easeFunctionName = '$ease$easeDir';
+			var easeFunctionName = '' + ease + easeDir;
 
 			var easeFunction:Null<Float->Float> = Reflect.field(FlxEase, easeFunctionName);
 			if (easeFunction == null) {
-				trace('Invalid ease function: $easeFunctionName');
-				return;
-			}
+				// trace('Invalid ease function: ' + easeFunctionName);
 
-			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
-				FlxTween.tween(PlayState.instance.camFollow, {
-					x: targetX,
-					y: targetY,
-				}, duration, {
-					ease: easeFunction
+				PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+					FlxTween.tween(PlayState.instance.camFollow, {
+						x: targetX,
+						y: targetY,
+					}, duration);
 				});
-			});
+			} else 
+				PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
+					FlxTween.tween(PlayState.instance.camFollow, {
+						x: targetX,
+						y: targetY,
+					}, duration, {
+						ease: easeFunction
+					});
+				});
+		
 	}
 }

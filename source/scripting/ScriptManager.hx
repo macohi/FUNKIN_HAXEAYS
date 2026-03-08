@@ -6,6 +6,7 @@ import data.*;
 import debugging.*;
 import objects.*;
 import ui.*;
+import states.*;
 
 class ScriptManager {
 	// alot yoinked from mobmod hehehehehaw
@@ -59,6 +60,7 @@ class ScriptManager {
 		'Conductor' => Conductor,
 		'Constants' => Constants,
 		'PlayState' => PlayState,
+		'SongSelectState' => SongSelectState,
 	];
 
 	public static inline function getMacroAbstractClass(className:String) {

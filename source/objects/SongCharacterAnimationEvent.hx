@@ -1,5 +1,7 @@
 package objects;
 
+import states.PlayState;
+
 class SongCharacterAnimationEvent extends SongEvent {
 	override public function new(time:Float, anim:String, character:Int = 0) {
 		super(time, function() {
