@@ -9,22 +9,28 @@ function vslice_addevent_FocusCamera(v:Dynamic, t:Float) {
 		case 0:
 			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
 				if (PlayState.instance.stage.player != null)
-					PlayState.instance.camFollow.setPosition(PlayState.instance.stage.player.getGraphicMidpoint().x,
-						PlayState.instance.stage.player.getGraphicMidpoint().y);
+					PlayState.instance.camFollow.setPosition(
+						PlayState.instance.stage.player.getGraphicMidpoint().x + PlayState.instance.stage.player.cameraOffsets[0],
+						PlayState.instance.stage.player.getGraphicMidpoint().y + PlayState.instance.stage.player.cameraOffsets[1]
+					);
 			});
 			return;
 		case 1:
 			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
 				if (PlayState.instance.stage.opponent != null)
-					PlayState.instance.camFollow.setPosition(PlayState.instance.stage.opponent.getGraphicMidpoint().x,
-						PlayState.instance.stage.opponent.getGraphicMidpoint().y);
+					PlayState.instance.camFollow.setPosition(
+						PlayState.instance.stage.opponent.getGraphicMidpoint().x + PlayState.instance.stage.opponent.cameraOffsets[0],
+						PlayState.instance.stage.opponent.getGraphicMidpoint().y + PlayState.instance.stage.opponent.cameraOffsets[1]
+					);
 			});
 			return;
 		case 2:
 			PlayState.instance.addEvent(t / Constants.MS_PER_SEC, function() {
 				if (PlayState.instance.stage.damsel != null)
-					PlayState.instance.camFollow.setPosition(PlayState.instance.stage.damsel.getGraphicMidpoint().x,
-						PlayState.instance.stage.damsel.getGraphicMidpoint().y);
+					PlayState.instance.camFollow.setPosition(
+						PlayState.instance.stage.damsel.getGraphicMidpoint().x + PlayState.instance.stage.damsel.cameraOffsets[0],
+						PlayState.instance.stage.damsel.getGraphicMidpoint().y + PlayState.instance.stage.damsel.cameraOffsets[1]
+						);
 			});
 			return;
 	}
@@ -60,18 +66,27 @@ function vslice_addevent_FocusCamera(v:Dynamic, t:Float) {
 			if (PlayState.instance.stage.player != null) {
 				targetX += PlayState.instance.stage.player.getGraphicMidpoint().x;
 				targetY += PlayState.instance.stage.player.getGraphicMidpoint().y;
+
+				targetX += PlayState.instance.stage.player.cameraOffsets[0];
+				targetY += PlayState.instance.stage.player.cameraOffsets[1];
 			}
 
 		case 1:
 			if (PlayState.instance.stage.opponent != null) {
 				targetX += PlayState.instance.stage.opponent.getGraphicMidpoint().x;
 				targetY += PlayState.instance.stage.opponent.getGraphicMidpoint().y;
+
+				targetX += PlayState.instance.stage.opponent.cameraOffsets[0];
+				targetY += PlayState.instance.stage.opponent.cameraOffsets[1];
 			}
 
 		case 2:
 			if (PlayState.instance.stage.damsel != null) {
 				targetX += PlayState.instance.stage.damsel.getGraphicMidpoint().x;
 				targetY += PlayState.instance.stage.damsel.getGraphicMidpoint().y;
+
+				targetX += PlayState.instance.stage.damsel.cameraOffsets[0];
+				targetY += PlayState.instance.stage.damsel.cameraOffsets[1];
 			}
 	}
 

@@ -10,5 +10,6 @@ typedef CharacterMetadata = {
 
 	?animations:Array<ObjectAnimationData>,
 
+	?cameraOffsets:Array<Float>,
 	?generalOffsets:Array<Float>,
 }

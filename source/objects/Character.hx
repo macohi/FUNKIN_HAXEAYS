@@ -27,6 +27,8 @@ class Character extends Bopper {
 		return AssetPaths.path('characters/${this.id}/$path');
 	}
 
+	public var cameraOffsets:Array<Float> = [];
+
 	override public function new(id:String) {
 		super();
 
@@ -63,6 +65,9 @@ class Character extends Bopper {
 				DebugLogger.error('Character "${this.id}" has an unknown or unsupported asset type: ${metadata.type}');
 		}
 
+
+		if (metadata.cameraOffsets != null)
+			cameraOffsets = metadata.cameraOffsets;
 
 		animationOffsets.clear();
 		applyGeneralOffsets();
