@@ -1,4 +1,4 @@
-package objects;
+package objects.events;
 
 class SongEvent {
 	public var time:Float;

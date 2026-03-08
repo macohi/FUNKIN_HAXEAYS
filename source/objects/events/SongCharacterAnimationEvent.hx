@@ -1,10 +1,13 @@
-package objects;
+package objects.events;
 
+import scripting.ScriptManager;
 import states.PlayState;
 
 class SongCharacterAnimationEvent extends SongEvent {
 	override public function new(time:Float, anim:String, character:Int = 0) {
 		super(time, function() {
+			ScriptManager.generalScriptHolder.scriptCall('SongCharacterAnimationEvent', [time, anim, character]);
+
 			switch (character) {
 				case 1:
 					PlayState.instance.stage.player.playAnim(anim);

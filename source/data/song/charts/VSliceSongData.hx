@@ -61,7 +61,10 @@ typedef VSliceChartNote = {
 	d:Int,
 
     // sustain
-	l:Float
+	l:Float,
+
+	// kind
+	k:Dynamic,
 }
 
 typedef VSliceChartEvent = {

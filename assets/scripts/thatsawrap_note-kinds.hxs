@@ -1,0 +1,29 @@
+function ChartNoteEventKind(kind:Dynamic = '', char:Int = 0)
+{
+	if (PlayState.instance.song.id != 'thats-a-wrap')
+		return;
+
+	if (kind == 'Duo Character Sing')
+		v = '-taw_duo';
+
+	if (kind == 'Extra Character Sing')
+		v = '-taw_extra';
+}
+
+function SongCharacterAnimationEvent(time:Float, animation:String, character:Int)
+{
+
+	if (PlayState.instance.song.id != 'thats-a-wrap')
+		return;
+
+	if (StringTools.endsWith(animation, 'taw_duo'))
+	{
+		trace('taw duo char anim');
+	}
+
+	if (StringTools.endsWith(animation, 'taw_extra'))
+	{
+		trace('taw extra char anim');
+	}
+
+}

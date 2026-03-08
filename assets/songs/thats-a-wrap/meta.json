@@ -1,0 +1,17 @@
+{
+    "name": "That's a wrap",
+    "artist": "RixFX ft. HighPoweredKeyz, Amai Hisa, & Flyplague",
+    
+    "startingBPM": 120,
+    
+    "songFiles": [
+        "Inst",
+        "Voices"
+    ],
+
+    "player": "bf",
+    "damsel": "gf",
+    "opponent": "dad",
+    
+    "stage": "mainStage"
+}

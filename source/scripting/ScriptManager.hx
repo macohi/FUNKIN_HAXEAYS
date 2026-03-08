@@ -1,11 +1,12 @@
 package scripting;
 
 import crowplexus.iris.Iris;
-import data.song.charts.VSliceSongChart;
+import data.song.charts.*;
 import sys.FileSystem;
 import data.*;
 import debugging.*;
 import objects.*;
+import objects.events.*;
 import states.*;
 import substates.*;
 import shaders.*;
@@ -46,6 +47,7 @@ class ScriptManager {
 		'FlxAxes' => getMacroAbstractClass('flixel.util.FlxAxes'),
 		'FlxColor' => getMacroAbstractClass('flixel.util.FlxColor'),
 		// HAXEAYS related stuff
+		'PsychSongChart' => PsychSongChart,
 		'VSliceSongChart' => VSliceSongChart,
 		'DebugLogger' => DebugLogger,
 		'AYSSprite' => AYSSprite,
@@ -55,6 +57,7 @@ class ScriptManager {
 		'PerspectiveSprite' => PerspectiveSprite,
 		'ScriptHolder' => ScriptHolder,
 		'Song' => Song,
+		'SongBPMChangeEvent' => SongBPMChangeEvent,
 		'SongCharacterAnimationEvent' => SongCharacterAnimationEvent,
 		'SongChartNoteEvent' => SongChartNoteEvent,
 		'SongEvent' => SongEvent,

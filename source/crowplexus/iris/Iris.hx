@@ -15,17 +15,17 @@ class IrisCall {
 	/**
 	 * an HScript Function Name.
 	**/
-	public var funName: String;
+	public var funName:String;
 
 	/**
 	 * an HScript Function's signature.
 	**/
-	public var signature: Dynamic;
+	public var signature:Dynamic;
 
 	/**
 	 * an HScript Method's return value.
 	**/
-	public var returnValue: Dynamic;
+	public var returnValue:Dynamic;
 }
 
 /**
@@ -38,10 +38,10 @@ class Iris {
 	/**
 	 * Map with stored instances of scripts.
 	**/
-	public static var instances: StringMap<Iris> = new StringMap<Iris>();
+	public static var instances:StringMap<Iris> = new StringMap<Iris>();
 
-	public static var registeredUsingEntries: Array<UsingEntry> = [
-		new UsingEntry("StringTools", function(o: Dynamic, f: String, args: Array<Dynamic>): Dynamic {
+	public static var registeredUsingEntries:Array<UsingEntry> = [
+		new UsingEntry("StringTools", function(o:Dynamic, f:String, args:Array<Dynamic>):Dynamic {
 			if (f == "isEof") // has @:noUsing
 				return null;
 			switch (Type.typeof(o)) {
@@ -58,7 +58,7 @@ class Iris {
 			}
 			return null;
 		}),
-		new UsingEntry("Lambda", function(o: Dynamic, f: String, args: Array<Dynamic>): Dynamic {
+		new UsingEntry("Lambda", function(o:Dynamic, f:String, args:Array<Dynamic>):Dynamic {
 			if (Tools.isIterable(o)) {
 				// TODO: Check if the values are Iterable<T>
 				if (Reflect.hasField(Lambda, f)) {
@@ -77,26 +77,26 @@ class Iris {
 	 *
 	 * you may find this useful if you want your project to be more secure.
 	**/
-	@:unreflective public static var blocklistImports: Array<String> = [];
+	@:unreflective public static var blocklistImports:Array<String> = [];
 
 	/**
 	 * Contains proxies for classes. So they can be sandboxed or add extra functionality.
 	**/
-	@:unreflective public static var proxyImports: Map<String, Dynamic> = ["Type" => ProxyType];
+	@:unreflective public static var proxyImports:Map<String, Dynamic> = ["Type" => ProxyType];
 
-	public static function addBlocklistImport(name: String): Void {
+	public static function addBlocklistImport(name:String):Void {
 		blocklistImports.push(name);
 	}
 
-	public static function addProxyImport(name: String, value: Dynamic): Void {
+	public static function addProxyImport(name:String, value:Dynamic):Void {
 		proxyImports.set(name, value);
 	}
 
-	public static function getProxiedImport(name: String): Dynamic {
+	public static function getProxiedImport(name:String):Dynamic {
 		return proxyImports.get(name);
 	}
 
-	private static function getDefaultPos(name: String = "Iris"): haxe.PosInfos {
+	private static function getDefaultPos(name:String = "Iris"):haxe.PosInfos {
 		return {
 			fileName: name,
 			lineNumber: -1,
@@ -111,7 +111,7 @@ class Iris {
 	 *
 	 * Overriding is recommended if you're doing custom error handling.
 	**/
-	public dynamic static function logLevel(level: ErrorSeverity, x:Dynamic, ?pos: haxe.PosInfos): Void {
+	public dynamic static function logLevel(level:ErrorSeverity, x:Dynamic, ?pos:haxe.PosInfos):Void {
 		if (pos == null) {
 			pos = getDefaultPos();
 		}
@@ -146,14 +146,14 @@ class Iris {
 	/**
 	 * Custom print function for script wrappers.
 	**/
-	public dynamic static function print(x:Dynamic, ?pos: haxe.PosInfos): Void {
+	public dynamic static function print(x:Dynamic, ?pos:haxe.PosInfos):Void {
 		logLevel(NONE, x, pos);
 	}
 
 	/**
 	 * Custom error function for script wrappers.
 	**/
-	public dynamic static function error(x:Dynamic, ?pos: haxe.PosInfos): Void {
+	public dynamic static function error(x:Dynamic, ?pos:haxe.PosInfos):Void {
 		logLevel(ERROR, x, pos);
 	}
 
@@ -162,28 +162,28 @@ class Iris {
 	 *
 	 * Overriding is recommended if you're doing custom error handling.
 	**/
-	public dynamic static function warn(x:Dynamic, ?pos: haxe.PosInfos): Void {
+	public dynamic static function warn(x:Dynamic, ?pos:haxe.PosInfos):Void {
 		logLevel(WARN, x, pos);
 	}
 
 	/**
 	 * Custom fatal error function for script wrappers.
 	**/
-	public dynamic static function fatal(x:Dynamic, ?pos: haxe.PosInfos): Void {
+	public dynamic static function fatal(x:Dynamic, ?pos:haxe.PosInfos):Void {
 		logLevel(FATAL, x, pos);
 	}
 
 	/**
 	 * Config file, set when creating a new `Iris` instance.
 	**/
-	public var config: IrisConfig = null;
+	public var config:IrisConfig = null;
 
 	/**
 	 * Current script name, from `config.name`.
 	**/
-	public var name(get, never): String;
+	public var name(get, never):String;
 
-	inline function get_name(): String
+	inline function get_name():String
 		return config.name;
 
 	/**
@@ -191,27 +191,27 @@ class Iris {
 	 *
 	 * contains a full haxe script instance
 	**/
-	var scriptCode: String = "";
+	var scriptCode:String = "";
 
 	/**
 	 * Current initialized script interpreter.
 	**/
-	var interp: Interp;
+	var interp:Interp;
 
 	/**
 	 * Current initialized script parser.
 	**/
-	var parser: Parser;
+	var parser:Parser;
 
 	/**
 	 * Current initialized script expression.
 	**/
-	var expr: Expr;
+	var expr:Expr;
 
 	/**
 	 * Helper variable for the error string caused by a nulled interpreter.
 	**/
-	final interpErrStr: String = "Careful, the interpreter hasn't been initialized";
+	final interpErrStr:String = "Careful, the interpreter hasn't been initialized";
 
 	/**
 	 * Instantiates a new Script with the string value.
@@ -223,7 +223,7 @@ class Iris {
 	 * will trace "Hello World!" to the standard output.
 	 * @param scriptCode      the script to be parsed, e.g:
 	 */
-	public function new(scriptCode: String, ?config: AutoIrisConfig): Void {
+	public function new(scriptCode:String, ?config:AutoIrisConfig):Void {
 		if (config == null)
 			config = new IrisConfig("Iris", true, true, []);
 		this.scriptCode = scriptCode;
@@ -246,10 +246,10 @@ class Iris {
 			execute();
 	}
 
-	private static function fixScriptName(toFix: String): String {
+	private static function fixScriptName(toFix:String):String {
 		// makes sure that we never have instances with identical names.
 		var _name = toFix;
-		var copyID: Int = 1;
+		var copyID:Int = 1;
 		while (Iris.instances.exists(_name)) {
 			_name = toFix + "_" + copyID;
 			copyID += 1;
@@ -260,7 +260,7 @@ class Iris {
 	/**
 	 * Executes this script and returns the interp's run result.
 	**/
-	public function execute(): Dynamic {
+	public function execute():Dynamic {
 		// I'm sorry but if you just decide to destroy the script at will, that's your fault
 		if (interp == null)
 			throw "Attempt to run script failed, script is probably destroyed.";
@@ -278,7 +278,7 @@ class Iris {
 	 *
 	 * just parse(); otherwise, forcing may fix some behaviour depending on your implementation.
 	**/
-	public function parse(force: Bool = false) {
+	public function parse(force:Bool = false) {
 		if (force || expr == null) {
 			expr = parser.parseString(scriptCode, this.name);
 		}
@@ -288,7 +288,7 @@ class Iris {
 	/**
 	 * Appends Default Classes/Enums for the Script to use.
 	**/
-	public function preset(): Void {
+	public function preset():Void {
 		set("Std", Std); // TODO: add a proxy for std
 		set("StringTools", StringTools);
 		set("Math", Math);
@@ -296,7 +296,7 @@ class Iris {
 		// overriding trace for good measure.
 		// if you're a game developer or a fnf modder (hi guys),
 		// you might wanna use Iris.print for your on-screen consoles and such.
-		set("trace", Reflect.makeVarArgs(function(x: Array<Dynamic>) {
+		set("trace", Reflect.makeVarArgs(function(x:Array<Dynamic>) {
 			var pos = this.interp != null ? this.interp.posInfos() : Iris.getDefaultPos(this.name);
 			var v = x.shift();
 			if (x.length > 0)
@@ -310,7 +310,7 @@ class Iris {
 	 * Returns a field from the script.
 	 * @param field 	The field that needs to be looked for.
 	 */
-	public function get(field: String): Dynamic {
+	public function get(field:String):Dynamic {
 		#if IRIS_DEBUG
 		if (interp == null)
 			Iris.fatal("[Iris:get()]: " + interpErrStr + ", when trying to get variable \"" + field + "\", returning false...");
@@ -324,7 +324,7 @@ class Iris {
 	 * @param value         The value for your new field.
 	 * @param allowOverride If set to true, when setting the new field, we will ignore any previously set fields of the same name.
 	 */
-	public function set(name: String, value: Dynamic, allowOverride: Bool = true): Void {
+	public function set(name:String, value:Dynamic, allowOverride:Bool = true):Void {
 		if (interp == null || interp.variables == null) {
 			#if IRIS_DEBUG
 			Iris.fatal("[Iris:set()]: " + interpErrStr + ", when trying to set variable \"" + name + "\" so variables cannot be set.");
@@ -336,12 +336,14 @@ class Iris {
 			interp.variables.set(name, value);
 	}
 
+	var idontwannarepeatmyself:Array<String> = [];
+
 	/**
 	 * Calls a method on the script
 	 * @param fun       The name of the method you wanna call.
 	 * @param args      The arguments that the method needs.
 	 */
-	public function call(fun: String, ?args: Array<Dynamic>): IrisCall {
+	public function call(fun:String, ?args:Array<Dynamic>):IrisCall {
 		if (interp == null) {
 			#if IRIS_DEBUG
 			trace("[Iris:call()]: " + interpErrStr + ", so functions cannot be called.");
@@ -349,17 +351,21 @@ class Iris {
 			return null;
 		}
 
+		if (idontwannarepeatmyself.contains(fun))
+			return null;
+
 		if (args == null)
 			args = [];
 
 		// fun-ny
-		var ny: Dynamic = interp.variables.get(fun); // function signature
-		var isFunction: Bool = false;
+		var ny:Dynamic = interp.variables.get(fun); // function signature
+
+		var isFunction:Bool = false;
 		try {
 			isFunction = ny != null && Reflect.isFunction(ny);
-			if (!isFunction)
+			if (!isFunction) {
 				throw 'Tried to call a non-function, for "$fun"';
-			// throw "Variable not found or not callable, for \"" + fun + "\"";
+			}
 
 			final ret = Reflect.callMethod(null, ny, args);
 			return {funName: fun, signature: ny, returnValue: ret};
@@ -372,8 +378,14 @@ class Iris {
 		#end
 		catch (e:haxe.Exception) {
 			var pos = isFunction ? this.interp.posInfos() : Iris.getDefaultPos(this.name);
-			Iris.error(Std.string(e), pos);
+			Iris.error(e, pos);
 		}
+		
+		idontwannarepeatmyself.push(fun);
+
+			if (idontwannarepeatmyself.length > 4)
+				idontwannarepeatmyself.remove(idontwannarepeatmyself[0]);
+
 		// @formatter:on
 		return null;
 	}
@@ -382,7 +394,7 @@ class Iris {
 	 * Checks the existance of a field or method within your script.
 	 * @param field 		The field to check if exists.
 	 */
-	public function exists(field: String): Bool {
+	public function exists(field:String):Bool {
 		#if IRIS_DEBUG
 		if (interp == null)
 			trace("[Iris:exists()]: " + interpErrStr + ", returning false...");
@@ -396,7 +408,7 @@ class Iris {
 	 *
 	 * **WARNING**: this action CANNOT be undone.
 	**/
-	public function destroy(): Void {
+	public function destroy():Void {
 		if (Iris.instances.exists(this.name))
 			Iris.instances.remove(this.name);
 		interp = null;
@@ -408,7 +420,7 @@ class Iris {
 	 *
 	 * **WARNING**: this action CANNOT be undone.
 	**/
-	public static function destroyAll(): Void {
+	public static function destroyAll():Void {
 		for (key in Iris.instances.keys()) {
 			var iris = Iris.instances.get(key);
 			if (iris.interp == null)
@@ -420,7 +432,7 @@ class Iris {
 		Iris.instances = new StringMap<Iris>();
 	}
 
-	public static function registerUsingGlobal(name: String, call: UsingCall): UsingEntry {
+	public static function registerUsingGlobal(name:String, call:UsingCall):UsingEntry {
 		var entry = new UsingEntry(name, call);
 		Iris.registeredUsingEntries.push(entry);
 		return entry;

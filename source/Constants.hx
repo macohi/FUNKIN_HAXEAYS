@@ -1,3 +1,5 @@
+import objects.events.SongChartNoteEvent;
+import states.PlayState;
 import flixel.util.FlxSort;
 import flixel.FlxBasic;
 
@@ -33,7 +35,52 @@ class Constants {
 	public static var SFX_CONFIRMMENU(get, never):String;
 	public static var SFX_SCROLLMENU(get, never):String;
 
-	static function get_SFX_CANCELMENU():String return AssetPaths.audio('ui/cancelMenu');
-	static function get_SFX_CONFIRMMENU():String return AssetPaths.audio('ui/confirmMenu');
-	static function get_SFX_SCROLLMENU():String return AssetPaths.audio('ui/scrollMenu');
+	static function get_SFX_CANCELMENU():String
+		return AssetPaths.audio('ui/cancelMenu');
+
+	static function get_SFX_CONFIRMMENU():String
+		return AssetPaths.audio('ui/confirmMenu');
+
+	static function get_SFX_SCROLLMENU():String
+		return AssetPaths.audio('ui/scrollMenu');
+
+	public static final CHART_PARSE_NOTE_HOLD_OFFSET:Float = Constants.MS_PER_SEC / 10;
+
+	public static function getNoteDirectionName(d:Int) {
+		switch (d % 4) {
+			case 0:
+				return 'left';
+			case 1:
+				return 'down';
+			case 2:
+				return 'up';
+			case 3:
+				return 'right';
+		}
+
+		return '';
+	}
+
+	public static function getCharacterOnDirection(d:Int) {
+		return (Math.floor(d / 4) < 1) ? 1 : 0;
+	}
+
+	public static function addNoteEvent(d:Int, l:Float, t:Float, k:Dynamic) {
+		var direction = Constants.getNoteDirectionName(d);
+		var char = Constants.getCharacterOnDirection(d);
+
+		// Duo Character Sing
+
+		if (l > 0) {
+			var l = 0.0;
+
+			while (l > 0) {
+				PlayState.instance.addEventObject(new SongChartNoteEvent(t + l, direction, char, k));
+
+				l -= CHART_PARSE_NOTE_HOLD_OFFSET;
+				l += CHART_PARSE_NOTE_HOLD_OFFSET;
+			}
+		} else
+			PlayState.instance.addEventObject(new SongChartNoteEvent(t, direction, char, k));
+	}
 }

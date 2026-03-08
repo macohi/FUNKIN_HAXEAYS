@@ -2,23 +2,44 @@
 
 (Spaghetti isn't coming soon, I was working on it but thats ALOT.)
 
+## revert
+
+- revert(thats-a-wrap): You can no longer press ESCAPE to leave gameplay after the countdown is done
+
 ## feats
 
+- feat(thats-a-wrap): `SongCharacterAnimationEvent(time, animation, character)` general script function
+- feat(thats-a-wrap): Note kind Support via scripts (`ChartNoteEventKind(kind, character)` function)
+    - Includes VSlice `note.k` field support
+- feat(thats-a-wrap): [THAT'S A WRAP](https://www.youtube.com/watch?v=VHhPVi9xSqg) FROM [FLAVOR RAVE](https://gamebanana.com/mods/410436) BY [RIXFX](https://www.youtube.com/@rixfx_)
+- feat(thats-a-wrap): VSlice BPM Changes Support
+- feat(thats-a-wrap): New song event object: `SongBPMChangeEvent`
+- feat(thats-a-wrap): Psych Engine Chart Support
+    - `parsePsychChart(song)` PlayState.instance function
+    - `loadPsychChart(song)` PlayState.instance function
+    - `PsychSongChart` class
 - feat: `addProp` stage script function
 - feat(spaghetti): `PerspectiveSprite` (I don't think it really works tho...)
 - feat(spaghetti): SserafimShader
 
 ## fixes
 
+- fix(thats-a-wrap): Scripts no longer spam the same error messages as long as 4 unique ones haven't appeared after its last logging
+- fix(thats-a-wrap): Incorrect VSlice chart parsing error messages when the chart or it's notes are null
 - fix: Supported Mod versions are now 0.3+ versions and any before are now labelled as outdated
 - fix(spaghetti): `CountdownSprite` is now imported in scripts
 - fix(spaghetti): At the start of the song the camera points at the middle of the opponent
 
 ## chores
 
+- chore(thats-a-wrap): Some chart parsing functions and variables have been moved to Constants for QOL
+    - `CHART_PARSE_NOTE_HOLD_OFFSET`
+    - `getNoteDirectionName(direction)`
+    - `getCharacterOnDirection(direction)`
+    - `addNoteEvent(direction, length, time)`
 - chore(chagnelog): New changelog format
 - chore(spaghetti): Split `loadVSliceChart` into `parseVSliceChart` and `loadVSliceChart`
-    - `parseVSliceChart` gives the VSlice chart note and event data
+    - `parseVSliceChart` gives the VSlice chart note, event data, and metadata
     - `loadVSliceChart` uses `parseVSliceChart` and makes the events according to the data its given
 
 ## refactors

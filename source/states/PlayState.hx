@@ -1,11 +1,12 @@
 package states;
 
+import data.song.charts.PsychSongChart;
 import substates.PauseSubState;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import objects.CountdownSprite;
 import data.song.charts.VSliceSongChart;
-import objects.SongEvent;
+import objects.events.SongEvent;
 import flixel.FlxObject;
 import flixel.util.FlxSort;
 import flixel.FlxCamera;
@@ -138,7 +139,7 @@ class PlayState extends MusicBeatState {
 				onSongLoading();
 		}
 
-		if (FlxG.keys.justReleased.ESCAPE)
+		if (FlxG.keys.justReleased.ESCAPE && !songStarted)
 			endSong();
 
 		camGame.zoom = cameraZoom;
@@ -329,4 +330,10 @@ class PlayState extends MusicBeatState {
 
 	public function loadVSliceChart(diff:String, song:String)
 		VSliceSongChart.loadVSliceChart(diff, song);
+
+	public function parsePsychChart(diff:String, song:String)
+		PsychSongChart.parsePsychChart(diff, song);
+
+	public function loadPsychChart(diff:String, song:String)
+		PsychSongChart.loadPsychChart(diff, song);
 }

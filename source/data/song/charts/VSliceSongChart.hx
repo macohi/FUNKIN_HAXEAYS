@@ -1,7 +1,7 @@
 package data.song.charts;
 
+import objects.events.SongBPMChangeEvent;
 import scripting.ScriptManager;
-import objects.SongChartNoteEvent;
 import haxe.Json;
 import debugging.DebugLogger;
 import lime.utils.Assets;
@@ -10,7 +10,7 @@ import states.PlayState;
 
 class VSliceSongChart {
 	public static function parseVSliceChart(difficulty:String, song:String) {
-		trace('Loading VSlice song (difficulty: $difficulty)');
+		trace('Parsing VSlice song: $song (difficulty: $difficulty)');
 
 		var metadata:VSliceMetadata;
 		var chart:VSliceChart;
@@ -49,10 +49,10 @@ class VSliceSongChart {
 		}
 
 		if (chart == null)
-			DebugLogger.error('Error loading VSlice song metadata (${metadataPath}): Null');
+			DebugLogger.error('Error loading VSlice song chart (${chartPath}): Null');
 
 		if (chart.notes == null)
-			DebugLogger.error('Error loading VSlice song metadata (${metadataPath}): Null notes field');
+			DebugLogger.error('Error loading VSlice song chart (${chartPath}): Null notes field');
 
 		var events:Array<VSliceChartEvent> = [];
 		var notes:Array<VSliceChartNote> = [];
@@ -73,6 +73,7 @@ class VSliceSongChart {
 		return {
 			events: events,
 			notes: notes,
+			metadata: metadata
 		};
 	}
 
@@ -82,6 +83,7 @@ class VSliceSongChart {
 		if (parsedVSlice == null)
 			return;
 
+		var metadata:VSliceMetadata = parsedVSlice.metadata;
 		var events:Array<VSliceChartEvent> = parsedVSlice.events;
 		var notes:Array<VSliceChartNote> = parsedVSlice.notes;
 
@@ -91,32 +93,10 @@ class VSliceSongChart {
 					ScriptManager.generalScriptHolder?.scriptCall('vslice_addevent_${event.e}', [event.v, event.t]);
 			}
 
-		final holdOffset:Float = Constants.MS_PER_SEC / 10;
-		for (note in notes) {
-			var direction = '';
+		for (note in notes)
+			Constants.addNoteEvent(note.d, note.l, note.t, note.k);
 
-			switch (note.d % 4) {
-				case 0:
-					direction = 'left';
-				case 1:
-					direction = 'down';
-				case 2:
-					direction = 'up';
-				case 3:
-					direction = 'right';
-			}
-
-			if (note.l > 0) {
-				var l = 0.0;
-
-				while (note.l > 0) {
-					PlayState.instance.addEventObject(new SongChartNoteEvent(note.t + l, direction, (Math.floor(note.d / 4) < 1 ? 1 : 0)));
-
-					note.l -= holdOffset;
-					l += holdOffset;
-				}
-			} else
-				PlayState.instance.addEventObject(new SongChartNoteEvent(note.t, direction, (Math.floor(note.d / 4) < 1 ? 1 : 0)));
-		}
+		for (timeChange in metadata.timeChanges)
+			PlayState.instance.addEventObject(new SongBPMChangeEvent(timeChange.t, timeChange.bpm));
 	}
 }

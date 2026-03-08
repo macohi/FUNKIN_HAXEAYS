@@ -8,6 +8,8 @@ import registries.SongRegistry;
 using StringTools;
 
 class SongSelectState extends MenuState {
+	public var songList:Array<String> = [];
+
 	override function create() {
 		var i = 0;
 		for (song in SongRegistry.instance.songList) {
@@ -17,7 +19,8 @@ class SongSelectState extends MenuState {
 			if (song_metadata == null)
 				return;
 
-			itemList.push(song);
+			itemList.push(song_metadata.name);
+			songList.push(song);
 
 			i++;
 		}
@@ -33,6 +36,6 @@ class SongSelectState extends MenuState {
 	override function accept() {
 		super.accept();
 
-		FlxG.switchState(() -> new PlayState(itemList[curSelect]));
+		FlxG.switchState(() -> new PlayState(songList[curSelect]));
 	}
 }
