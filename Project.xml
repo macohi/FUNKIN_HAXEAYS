@@ -6,7 +6,7 @@
 
 	<app title="Friday Night Funkin' Haxe AYS" file="HAXEAYS"/>
 	<app company="Macohi" />
-	<app version="0.1.1"/>
+	<app version="0.2.0"/>
 	<app main="Main" />
 
 	<app preloader="flixel.system.FlxPreloader" />

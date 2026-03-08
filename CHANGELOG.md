@@ -1,4 +1,6 @@
-# 0.1.1 - (3/8/2026)
+# 0.2.0 - (3/8/2026)
+- feat: Added Bopeebo (erect)
+
 - fix: The song countdown now fades correctly
 - fix: song audio files now are linked once again to the soundtray volume
 - fix: `bf` and `dad` have the correct camera offsets again

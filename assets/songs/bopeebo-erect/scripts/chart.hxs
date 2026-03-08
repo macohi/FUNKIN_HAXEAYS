@@ -1,0 +1,4 @@
+function onSongLoaded()
+{
+    PlayState.instance.loadVSliceChart('nightmare', 'bopeebo-erect');
+}
