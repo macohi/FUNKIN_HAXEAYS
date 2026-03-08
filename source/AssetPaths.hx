@@ -1,3 +1,4 @@
+import sys.FileSystem;
 import flixel.graphics.frames.FlxAtlasFrames;
 import lime.utils.Assets;
 import modding.ModCore;
@@ -7,7 +8,7 @@ class AssetPaths {
 		for (mod in ModCore.instance.allMods) {
 			final modPath = 'mods/$mod/$p';
 
-			if (Assets.exists(modPath))
+			if (FileSystem.exists(modPath))
 				return modPath;
 		}
 
