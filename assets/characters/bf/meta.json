@@ -1,6 +1,10 @@
 {
     "type": "sparrow",
     "imageName": "atlas",
+    "cameraOffsets": [
+        0,
+        -200
+    ],
     "animations": [
         {
             "name": "idle",
