@@ -1,0 +1,171 @@
+{
+    "characters": {
+        "player": {
+            "position": [
+                900,
+                400
+            ]
+        },
+        "opponent": {
+            "position": [
+                40,
+                380
+            ]
+        },
+        "damsel": {
+            "position": [
+                650,
+                320
+            ]
+        }
+    },
+    "props": [
+        {
+            "id": "solid",
+            "zIndex": 0,
+            "assetType": "solid",
+            "color": "#222026",
+            "position": [
+                -500,
+                -1000
+            ],
+            "scale": [
+                2400,
+                2000
+            ],
+            "scroll": [
+                0,
+                0
+            ]
+        },
+        {
+            "zIndex": 10,
+            "position": [
+                967,
+                -103
+            ],
+            "assetType": "image",
+            "id": "brightLightSmall",
+            "assetPath": "erect/brightLightSmall",
+            "scroll": [
+                1.2,
+                1.2
+            ],
+            "alpha": 1
+        },
+        {
+            "id": "crowd",
+            "assetPath": "erect/crowd",
+            "assetType": "sparrow",
+            "position": [
+                682,
+                290
+            ],
+            "scroll": [
+                0.8,
+                0.8
+            ],
+            "zIndex": 5,
+            "startingAnimation": "idle",
+            "animations": [
+                {
+                    "name": "idle",
+                    "type": "type",
+                    "prefix": "idle0",
+                    "fps": 12,
+                    "looped": true
+                }
+            ]
+        },
+        {
+            "zIndex": 20,
+            "position": [
+                -765,
+                -247
+            ],
+            "assetType": "image",
+            "id": "bg",
+            "assetPath": "erect/bg",
+            "scroll": [
+                1,
+                1
+            ]
+        },
+        {
+            "zIndex": 30,
+            "position": [
+                -991,
+                205
+            ],
+            "assetType": "image",
+            "id": "server",
+            "assetPath": "erect/server",
+            "scroll": [
+                1,
+                1
+            ]
+        },
+        {
+            "zIndex": 4000,
+            "position": [
+                -847,
+                -245
+            ],
+            "assetType": "image",
+            "id": "lights",
+            "assetPath": "erect/lights",
+            "scroll": [
+                1.2,
+                1.2
+            ]
+        },
+        {
+            "zIndex": 400,
+            "position": [
+                189,
+                500
+            ],
+            "scale": [
+                1,
+                1700
+            ],
+            "assetType": "image",
+            "id": "orangeLight",
+            "assetPath": "erect/orangeLight",
+            "alpha": 1
+        },
+        {
+            "zIndex": 40,
+            "position": [
+                -171,
+                242
+            ],
+            "assetType": "image",
+            "id": "lightgreen",
+            "assetPath": "erect/lightgreen",
+            "alpha": 1
+        },
+        {
+            "zIndex": 40,
+            "position": [
+                -101,
+                560
+            ],
+            "assetType": "image",
+            "id": "lightred",
+            "assetPath": "erect/lightred",
+            "alpha": 1
+        },
+        {
+            "zIndex": 4500,
+            "position": [
+                804,
+                -117
+            ],
+            "assetType": "image",
+            "id": "lightAbove",
+            "assetPath": "erect/lightAbove",
+            "alpha": 1
+        }
+    ]
+}

@@ -21,9 +21,12 @@ typedef StageBasePropBasicData = {
 }
 
 typedef StageBasePropAssetData = {
+	?color:String,
+
 	?assetType:ObjectAssetType,
 
 	?assetPath:String,
 
-	?animations:ObjectAnimationData,
+	?startingAnimation:String,
+	?animations:Array<ObjectAnimationData>,
 }

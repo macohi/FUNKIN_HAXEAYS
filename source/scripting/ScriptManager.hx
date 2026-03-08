@@ -7,6 +7,7 @@ import debugging.*;
 import objects.*;
 import states.*;
 import substates.*;
+import shaders.*;
 
 class ScriptManager {
 	// alot yoinked from mobmod hehehehehaw
@@ -56,6 +57,8 @@ class ScriptManager {
 		'CharacterScript' => CharacterScript,
 		'ScriptManager' => ScriptManager,
 		'SongScript' => SongScript,
+		'StageScript' => StageScript,
+		'AdjustColorShader' => AdjustColorShader,
 		'MusicBeatState' => MusicBeatSubState,
 		'Conductor' => Conductor,
 		'Constants' => Constants,

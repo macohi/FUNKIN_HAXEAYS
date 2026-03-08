@@ -32,4 +32,7 @@ class AssetPaths {
 
 	public static function json(p:String):String
 		return path(p + Constants.EXT_JSON);
+
+	public static function frag(p:String):String
+		return path(p + Constants.EXT_FRAG);
 }

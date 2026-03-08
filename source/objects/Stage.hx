@@ -1,5 +1,7 @@
 package objects;
 
+import flixel.util.FlxColor;
+import flixel.FlxSprite;
 import states.PlayState;
 import registries.StageRegistry;
 import data.song.SongMetaData;
@@ -83,6 +85,23 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 		scriptFiles = ScriptManager.readScriptFolder(getPath('scripts'), function(s) {
 			return new StageScript(this.id, s);
 		});
+
+		scriptSet('getNamedProp', getNamedProp);
+		scriptSet('player', player);
+		scriptSet('damsel', damsel);
+		scriptSet('opponent', opponent);
+
+		scriptCall('buildStage');
+	}
+
+	public var propIdtoObj:Map<String, FlxBasic> = [];
+
+	public function getNamedProp(id:String):FlxBasic
+	{
+		if (propIdtoObj.exists(id))
+			return propIdtoObj.get(id);
+
+		return null;
 	}
 
 	public function loadProps() {
@@ -98,6 +117,12 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 				case image:
 					parseImageProp(prop);
 
+				case solid:
+					parseSolidProp(prop);
+
+				case sparrow:
+					parseSparrowProp(prop);
+
 				default:
 					trace('Unimplemented prop asset type: ${prop.assetType}');
 			}
@@ -110,25 +135,67 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 		if (prop.assetPath != null)
 			image.loadGraphic(getPath('props/${prop.assetPath}${Constants.EXT_PNG}'));
 
-		if (prop.position != null) {
-			image.x = prop.position[0] ?? 0;
-			image.y = prop.position[1] ?? 0;
-		}
-		if (prop.scale != null) {
-			image.scale.x = prop.scale[0] ?? 0;
-			image.scale.y = prop.scale[1] ?? 0;
-		}
-		if (prop.scroll != null) {
-			image.scrollFactor.x = prop.scroll[0] ?? 0;
-			image.scrollFactor.y = prop.scroll[1] ?? 0;
-		}
-		if (prop.zIndex != null)
-			image.zIndex = prop.zIndex;
-		if (prop.alpha != null)
-			image.alpha = prop.alpha;
+		applyConstPropValues(prop, image);
 
 		trace(' * image: ${prop.id}');
+
 		add(image);
+		propIdtoObj.set(prop.id, image);
+	}
+
+	public function parseSolidProp(prop:StagePropData) {
+		var solid:AYSSprite = new AYSSprite();
+
+		solid.makeGraphic(1, 1, FlxColor.WHITE);
+
+		applyConstPropValues(prop, solid);
+
+		trace(' * solid: ${prop.id}');
+
+		add(solid);
+		propIdtoObj.set(prop.id, solid);
+	}
+
+	public function parseSparrowProp(prop:StagePropData) {
+		var sparrow:AYSSprite = new AYSSprite();
+
+		if (prop.assetPath != null)
+			sparrow.frames = AssetPaths.fromSparrow('stages/${this.id}/props/${prop.assetPath}');
+
+		if (prop.animations != null)
+			for (a in prop.animations)
+			{
+				if (a.type == prefix)
+					sparrow.addPrefixAnimation(a.name, a.prefix, a.fps ?? 24, a.looped ?? false);
+			}
+
+		applyConstPropValues(prop, sparrow);
+
+		trace(' * sparrow: ${prop.id}');
+
+		add(sparrow);
+		propIdtoObj.set(prop.id, sparrow);
+	}
+
+	public function applyConstPropValues(prop:StagePropData, spr:AYSSprite) {
+		if (prop.position != null) {
+			spr.x = prop.position[0] ?? 0;
+			spr.y = prop.position[1] ?? 0;
+		}
+		if (prop.scale != null) {
+			spr.scale.x = prop.scale[0] ?? 0;
+			spr.scale.y = prop.scale[1] ?? 0;
+		}
+		if (prop.scroll != null) {
+			spr.scrollFactor.x = prop.scroll[0] ?? 0;
+			spr.scrollFactor.y = prop.scroll[1] ?? 0;
+		}
+		if (prop.zIndex != null)
+			spr.zIndex = prop.zIndex;
+		if (prop.alpha != null)
+			spr.alpha = prop.alpha;
+		if (prop.color != null)
+			spr.color = FlxColor.fromString(prop.color);
 	}
 
 	public function parseCharactersField() {

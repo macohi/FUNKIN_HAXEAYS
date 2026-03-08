@@ -1,5 +1,21 @@
 # 0.2.0 - (3/8/2026)
-- fix: The cursor is now invisible
+- feat: mainStageErect BG
+    - feat: `player`, `damsel`, and `opponent` stage script variables
+    - feat: `getNamedProp` stage script function
+    - feat: `buildStage` stage script function
+    
+    - fix: `StageScript` is now imported into scripts
+    
+    - feat: AdjustColorShader
+    
+    - fix: The `animations` field is now properly an array of animation data and not singular animation data
+
+    - feat: proper `sparrow` prop support
+    - feat: `color` prop field
+    - feat: `startingAnimation` prop field
+    - feat: `solid` prop asset type
+
+- fix: The flixel cursor is now invisible
 
 - feat: Pause menu now displays the song name and composer / artist
 - feat: Added Bopeebo (erect)

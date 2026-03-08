@@ -1,6 +1,7 @@
 haxelib newrepo
 
 haxelib install flixel --always
+haxelib install flixel-addons --always
 haxelib install flixel-animate --always
 
 haxelib install hscript-iris --always

@@ -15,6 +15,7 @@ class Constants {
 	public static final EXT_XML:String = '.xml';
 	public static final EXT_PNG:String = '.png';
 	public static final EXT_HSCRIPT:String = '.hxs';
+	public static final EXT_FRAG:String = '.frag';
 
 	public static final EXT_SONG_META:String = EXT_JSON;
 	public static final EXT_SONG_CHART:String = EXT_JSON;

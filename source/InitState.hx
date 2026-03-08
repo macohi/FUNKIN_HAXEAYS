@@ -44,7 +44,7 @@ class InitState extends FlxState {
 
 		FlxSprite.defaultAntialiasing = true;
 
-		FlxG.mouse.visible = false;
+		FlxG.mouse.useSystemCursor = true;
 
 		instanceInitalization();
 
