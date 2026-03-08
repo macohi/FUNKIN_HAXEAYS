@@ -1,5 +1,8 @@
 package states;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import objects.CountdownSprite;
 import data.song.charts.VSliceSongChart;
 import objects.SongEvent;
 import flixel.FlxObject;
@@ -25,7 +28,7 @@ class PlayState extends MusicBeatState {
 
 	public var stage:Stage;
 
-	public var songLoaded:Bool = false;
+	public var countdownComplete:Bool = false;
 	public var songStarted:Bool = false;
 
 	public var camGame:FlxCamera;
@@ -38,6 +41,8 @@ class PlayState extends MusicBeatState {
 	public var events:Array<SongEvent> = [];
 
 	private var songID:String = 'urmom';
+
+	public var countdown:CountdownSprite;
 
 	override public function new(?songID:String) {
 		super();
@@ -77,16 +82,22 @@ class PlayState extends MusicBeatState {
 		camGame.focusOn(camFollow.getPosition());
 
 		conductor.bpm = song.startingBPM;
-		conductor.time -= (conductor.quaver * Constants.STEPS_PER_SECTION);
+		conductor.time -= conductor.crotchet * 5;
 
-		songLoaded = true;
+		countdown = new CountdownSprite();
+		add(countdown);
+		countdown.display('ready glow');
+		countdown.cameras = [camHUD];
+		countdown.screenCenter();
+
 		refresh();
-		scriptCall('onSongLoaded');
 
 		if (song.metadata == null) {
 			endSong();
 			return;
 		}
+
+		scriptCall('onSongLoaded');
 	}
 
 	public var focusLostPause:Bool = false;
@@ -99,18 +110,20 @@ class PlayState extends MusicBeatState {
 
 		if (paused) {
 			scriptCall('onPause');
-			
+
 			conductorTimeBeforePause = conductor.time;
-			song.pauseAudio();
+			if (songStarted)
+				song.pauseAudio();
 		} else {
 			scriptCall('onUnpause');
 
 			conductor.time = conductorTimeBeforePause;
+			if (songStarted) {
+				for (a in audioFiles)
+					a.time = conductorTimeBeforePause;
 
-			for (a in audioFiles)
-				a.time = conductorTimeBeforePause;
-
-			song.playAudio();
+				song.playAudio();
+			}
 		}
 	}
 
@@ -128,7 +141,7 @@ class PlayState extends MusicBeatState {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (songLoaded) {
+		if (countdownComplete) {
 			if (!paused) {
 				conductor.time += elapsed * Constants.MS_PER_SEC;
 				conductor.update();
@@ -139,9 +152,57 @@ class PlayState extends MusicBeatState {
 
 			if (!paused)
 				checkSongTime();
+		} else {
+			if (FlxG.keys.justReleased.ENTER) {
+				onSongLoading();
+			}
 		}
 
 		camGame.zoom = cameraZoom;
+	}
+
+	public function onSongLoading() {
+		countdownComplete = true;
+
+		var countdownBeathit:Int->Void = null;
+
+		countdownBeathit = function(beat) {
+			if (beat < 1) {
+				switch (beat) {
+					case 0:
+						remove(countdown);
+						countdown.destroy();
+
+						conductor.beatHit.remove(countdownBeathit);
+
+					case -1:
+						countdown.display('go');
+						scriptCall('countdownTick', [4]);
+					case -2:
+						countdown.display('1');
+						scriptCall('countdownTick', [3]);
+					case -3:
+						countdown.display('2');
+						scriptCall('countdownTick', [2]);
+					case -4:
+						countdown.display('3');
+						scriptCall('countdownTick', [1]);
+					case -5:
+						countdown.display('ready regular');
+						FlxG.sound.play('assets/ui/confirmMenu${Constants.EXT_AUDIO}');
+						scriptCall('countdownTick', [0]);
+				}
+
+				if (beat < 0) {
+					FlxTween.cancelTweensOf(countdown);
+					FlxTween.tween(countdown, {alpha: 0}, Conductor.instance.crotchet, {
+						ease: FlxEase.sineInOut
+					});
+				}
+			}
+		}
+
+		conductor.beatHit.add(countdownBeathit);
 	}
 
 	public function checkSongTime() {
