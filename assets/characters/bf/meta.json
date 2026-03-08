@@ -8,22 +8,22 @@
             "prefix": "bf anim idle"
         },
         {
-            "name": "left",
+            "name": "singLEFT",
             "type": "prefix",
             "prefix": "bf anim left"
         },
         {
-            "name": "down",
+            "name": "singDOWN",
             "type": "prefix",
             "prefix": "bf anim down"
         },
         {
-            "name": "up",
+            "name": "singUP",
             "type": "prefix",
             "prefix": "bf anim up"
         },
         {
-            "name": "right",
+            "name": "singRIGHT",
             "type": "prefix",
             "prefix": "bf anim right"
         }

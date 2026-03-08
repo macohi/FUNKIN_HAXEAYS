@@ -17,6 +17,8 @@ class Constants {
 	public static final EXT_HSCRIPT:String = '.hxs';
 
 	public static final EXT_SONG_META:String = EXT_JSON;
+	public static final EXT_SONG_CHART:String = EXT_JSON;
+
 	public static final EXT_CHARACTER_META:String = EXT_JSON;
 	public static final EXT_STAGE_META:String = EXT_JSON;
 

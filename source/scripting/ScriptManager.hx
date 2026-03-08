@@ -1,11 +1,9 @@
 package scripting;
 
-import haxe.PosInfos;
-import crowplexus.iris.Iris;
+import data.song.charts.VSliceSongChart;
 import sys.FileSystem;
 import data.*;
 import debugging.*;
-import flixel.*;
 import objects.*;
 import ui.*;
 
@@ -42,12 +40,15 @@ class ScriptManager {
 		'FlxAxes' => getMacroAbstractClass('flixel.util.FlxAxes'),
 		'FlxColor' => getMacroAbstractClass('flixel.util.FlxColor'),
 		// HAXEAYS related stuff
+		'VSliceSongChart' => VSliceSongChart,
 		'DebugLogger' => DebugLogger,
 		'AYSSprite' => AYSSprite,
 		'Bopper' => Bopper,
 		'Character' => Character,
 		'ScriptHolder' => ScriptHolder,
 		'Song' => Song,
+		'SongCharacterAnimationEvent' => SongCharacterAnimationEvent,
+		'SongChartNoteEvent' => SongChartNoteEvent,
 		'SongEvent' => SongEvent,
 		'Stage' => Stage,
 		'BaseScript' => BaseScript,

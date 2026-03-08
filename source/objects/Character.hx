@@ -1,5 +1,6 @@
 package objects;
 
+import flixel.math.FlxPoint;
 import scripting.ScriptManager;
 import data.objects.ObjectAnimationType;
 import data.objects.ObjectTagData;
@@ -31,6 +32,8 @@ class Character extends Bopper {
 		this.id = id;
 
 		scriptHolder = new ScriptHolder();
+
+		cameraFollowPoint = new FlxPoint();
 
 		if (!Assets.exists(getPath('meta${Constants.EXT_CHARACTER_META}'))) {
 			DebugLogger.error('Character ${this.id} is missing their metadata file');
@@ -71,6 +74,8 @@ class Character extends Bopper {
 	public function scriptGet(variable:String):Dynamic
 		return scriptHolder.scriptGet(variable);
 
+	public var cameraFollowPoint:FlxPoint = new FlxPoint(0, 0);
+
 	public function loadCharacter() {
 		trace('Loading character: ${this.id}');
 
@@ -84,6 +89,8 @@ class Character extends Bopper {
 			default:
 				DebugLogger.error('Character "${this.id}" has an unknown or unsupported asset type: ${metadata.type}');
 		}
+
+		cameraFollowPoint.set(this.getGraphicMidpoint().x, this.getGraphicMidpoint().y);
 
 		animationOffsets.clear();
 		applyGeneralOffsets();

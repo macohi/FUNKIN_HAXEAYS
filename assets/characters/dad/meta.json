@@ -14,22 +14,22 @@
             "prefix": "daddy anim idle"
         },
         {
-            "name": "left",
+            "name": "singLEFT",
             "type": "prefix",
             "prefix": "daddy anim left"
         },
         {
-            "name": "down",
+            "name": "singDOWN",
             "type": "prefix",
             "prefix": "daddy anim down"
         },
         {
-            "name": "up",
+            "name": "singUP",
             "type": "prefix",
             "prefix": "daddy anim up"
         },
         {
-            "name": "right",
+            "name": "singRIGHT",
             "type": "prefix",
             "prefix": "daddy anim right"
         }

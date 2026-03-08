@@ -1,5 +1,6 @@
 package;
 
+import data.song.charts.VSliceSongChart;
 import objects.SongEvent;
 import flixel.FlxObject;
 import flixel.util.FlxSort;
@@ -78,12 +79,20 @@ class PlayState extends MusicBeatState {
 	public var focusLostPause:Bool = false;
 	public var paused:Bool = false;
 
+	var conductorTimeBeforePause:Float = 0;
+
 	public function pause() {
 		paused = !paused;
 
 		if (paused) {
+			conductorTimeBeforePause = conductor.time;
 			song.pauseAudio();
 		} else {
+			conductor.time = conductorTimeBeforePause;
+
+			for (a in audioFiles)
+				a.time = conductorTimeBeforePause;
+
 			song.playAudio();
 		}
 	}
@@ -100,13 +109,16 @@ class PlayState extends MusicBeatState {
 		super.update(elapsed);
 
 		if (songLoaded) {
-			conductor.time += elapsed * Constants.MS_PER_SEC;
-			conductor.update();
+			if (!paused) {
+				conductor.time += elapsed * Constants.MS_PER_SEC;
+				conductor.update();
+			}
 
 			if (conductor.time >= 0 && !songStarted)
 				startSong();
 
-			checkSongTime();
+			if (!paused)
+				checkSongTime();
 		}
 
 		camGame.zoom = cameraZoom;
@@ -120,7 +132,6 @@ class PlayState extends MusicBeatState {
 			final ct = conductor.time / Constants.MS_PER_SEC;
 
 			if ((et - wrs) < (ct) && (et + wrs) < ct) {
-
 				event.event();
 				events.remove(event);
 			}
@@ -137,9 +148,11 @@ class PlayState extends MusicBeatState {
 		}
 	}
 
-	public function addEvent(time:Float, event:Void->Void) {
-		events.push(new SongEvent(time * Constants.MS_PER_SEC, event));
-	}
+	public function addEvent(time:Float, event:Void->Void)
+		addEventObject(new SongEvent(time * Constants.MS_PER_SEC, event));
+
+	public function addEventObject(eventObj:SongEvent)
+		events.push(eventObj);
 
 	override function onFocusLost() {
 		super.onFocusLost();
@@ -193,5 +206,9 @@ class PlayState extends MusicBeatState {
 		super.sectionHit(section);
 
 		scriptCall('sectionHit', [section]);
+	}
+
+	public function loadVSliceChart(diff:String, song:String) {
+		VSliceSongChart.loadVSliceChart(diff, song);
 	}
 }
