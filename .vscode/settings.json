@@ -12,7 +12,13 @@
 		}
 	],
 	"lime.defaultTargetConfiguration": "Windows / Indev",
+
 	"conventionalCommits.scopes": [
-		"changelog"
+		"changelog",
+		"vscode",
+		"misc",
+
+		"spaghetti",
+		"thats-a-wrap",
 	],
 }

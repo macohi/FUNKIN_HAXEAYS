@@ -1,5 +1,7 @@
 # 0.3.0 - (3/8/2026)
 
+(Spaghetti isn't coming soon, I was working on it but thats ALOT.)
+
 ## feats
 
 - feat: `addProp` stage script function
