@@ -15,7 +15,7 @@
     - feat: `startingAnimation` prop field
     - feat: `solid` prop asset type
 
-- fix: The flixel cursor is now invisible
+- fix: The flixel cursor is now invisible (it uses your system cursor now)
 
 - feat: Pause menu now displays the song name and composer / artist
 - feat: Added Bopeebo (erect)
