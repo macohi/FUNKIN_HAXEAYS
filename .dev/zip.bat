@@ -3,7 +3,7 @@
 @REM I am expecting to run it like this: ".\.dev/zip.bat"
 
 set /P directory="Enter directory (example: debug/hl): "
-set /P suffix="Enter file suffix (example: windows-0.3.0): "
+set /P suffix="Enter file suffix (example: 0.3.0-windows): "
 
 echo Moving to directory: "export/%directory%/bin/"
 cd "export/%directory%/bin/"
