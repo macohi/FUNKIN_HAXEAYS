@@ -70,6 +70,19 @@ class PauseSubState extends MusicBeatSubState {
 
 		pauseCam.follow(camFollow, LOCKON, 0.4);
 		pauseCam.focusOn(camFollow.getPosition());
+
+		
+
+		var watermark:FlxText = new FlxText(0, 10, FlxG.width, '', 32);
+		add(watermark);
+		watermark.scrollFactor.set();
+		watermark.alignment = RIGHT;
+		watermark.alpha = 0;
+
+		watermark.text = 'Song: ${PlayState.instance.song.name}\n';
+		watermark.text += 'Artist: ${PlayState.instance.song.artist}\n';
+
+			FlxTween.tween(watermark, {alpha: 1}, 0.6, {ease: FlxEase.sineInOut});
 	}
 
 	override function update(elapsed:Float) {

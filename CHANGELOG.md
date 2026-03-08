@@ -1,4 +1,5 @@
 # 0.2.0 - (3/8/2026)
+- feat: Pause menu now displays the song name and composer / artist
 - feat: Added Bopeebo (erect)
 
 - fix: The song countdown now fades correctly
