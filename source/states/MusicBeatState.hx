@@ -1,4 +1,4 @@
-package ui;
+package states;
 
 import flixel.util.FlxSort;
 import flixel.FlxState;

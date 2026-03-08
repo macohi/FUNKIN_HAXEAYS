@@ -5,8 +5,8 @@ import sys.FileSystem;
 import data.*;
 import debugging.*;
 import objects.*;
-import ui.*;
 import states.*;
+import substates.*;
 
 class ScriptManager {
 	// alot yoinked from mobmod hehehehehaw
@@ -56,7 +56,7 @@ class ScriptManager {
 		'CharacterScript' => CharacterScript,
 		'ScriptManager' => ScriptManager,
 		'SongScript' => SongScript,
-		'MusicBeatState' => MusicBeatState,
+		'MusicBeatState' => MusicBeatSubState,
 		'Conductor' => Conductor,
 		'Constants' => Constants,
 		'PlayState' => PlayState,

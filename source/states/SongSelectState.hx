@@ -8,7 +8,6 @@ import flixel.system.FlxAssets;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import registries.SongRegistry;
-import ui.MusicBeatState;
 
 using StringTools;
 
@@ -72,10 +71,14 @@ class SongSelectState extends MusicBeatState {
 			FlxG.switchState(() -> new PlayState(songsList[curSelect]));
 		}
 
-		if (FlxG.keys.anyJustReleased([UP, W]))
+		if (FlxG.keys.anyJustReleased([UP, W])) {
 			curSelect--;
-		if (FlxG.keys.anyJustReleased([DOWN, S]))
+			FlxG.sound.play(Constants.SFX_SCROLLMENU);
+		}
+		if (FlxG.keys.anyJustReleased([DOWN, S])) {
 			curSelect++;
+			FlxG.sound.play(Constants.SFX_SCROLLMENU);
+		}
 
 		if (curSelect < 0)
 			curSelect = songsList.length - 1;

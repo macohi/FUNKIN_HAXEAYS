@@ -1,5 +1,6 @@
 package states;
 
+import substates.PauseSubState;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import objects.CountdownSprite;
@@ -13,7 +14,6 @@ import objects.Stage;
 import debugging.DebugLogger;
 import flixel.sound.FlxSound;
 import objects.Song;
-import ui.MusicBeatState;
 import objects.Character;
 
 class PlayState extends MusicBeatState {
@@ -28,7 +28,7 @@ class PlayState extends MusicBeatState {
 
 	public var stage:Stage;
 
-	public var countdownComplete:Bool = false;
+	public var updateConductor:Bool = false;
 	public var songStarted:Bool = false;
 
 	public var camGame:FlxCamera;
@@ -82,13 +82,15 @@ class PlayState extends MusicBeatState {
 		camGame.focusOn(camFollow.getPosition());
 
 		conductor.bpm = song.startingBPM;
-		conductor.time -= conductor.crotchet * 5;
+		conductor.time = conductor.crotchet * -5;
 
 		countdown = new CountdownSprite();
 		add(countdown);
 		countdown.display('ready glow');
 		countdown.cameras = [camHUD];
 		countdown.screenCenter();
+
+		FlxG.sound.play(Constants.SFX_SCROLLMENU);
 
 		refresh();
 
@@ -98,6 +100,41 @@ class PlayState extends MusicBeatState {
 		}
 
 		scriptCall('onSongLoaded');
+
+		// persistentUpdate = true;
+	}
+
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+
+		if (updateConductor) {
+			if (!paused) {
+				conductor.time += elapsed * Constants.MS_PER_SEC;
+				conductor.update();
+			}
+
+			if (!paused)
+				if (conductor.time >= 0 && !songStarted)
+					startSong();
+
+			if (!paused)
+				checkSongTime();
+
+			if (FlxG.keys.justReleased.ENTER) {
+				if (songStarted)
+					pause();
+			}
+
+			if (FlxG.keys.justReleased.ESCAPE) {
+				if (!songStarted)
+					endSong();
+			}
+		} else {
+			if (FlxG.keys.justReleased.ENTER)
+				onSongLoading();
+		}
+
+		camGame.zoom = cameraZoom;
 	}
 
 	public var focusLostPause:Bool = false;
@@ -111,11 +148,18 @@ class PlayState extends MusicBeatState {
 		if (paused) {
 			scriptCall('onPause');
 
+			if (!focusLostPause) {
+				openSubState(new PauseSubState());
+				camGame.followLerp = 0;
+			}
+
 			conductorTimeBeforePause = conductor.time;
 			if (songStarted)
 				song.pauseAudio();
 		} else {
 			scriptCall('onUnpause');
+
+			camGame.followLerp = 0.04;
 
 			conductor.time = conductorTimeBeforePause;
 			if (songStarted) {
@@ -138,31 +182,8 @@ class PlayState extends MusicBeatState {
 		FlxG.switchState(() -> new SongSelectState());
 	}
 
-	override public function update(elapsed:Float) {
-		super.update(elapsed);
-
-		if (countdownComplete) {
-			if (!paused) {
-				conductor.time += elapsed * Constants.MS_PER_SEC;
-				conductor.update();
-			}
-
-			if (conductor.time >= 0 && !songStarted)
-				startSong();
-
-			if (!paused)
-				checkSongTime();
-		} else {
-			if (FlxG.keys.justReleased.ENTER) {
-				onSongLoading();
-			}
-		}
-
-		camGame.zoom = cameraZoom;
-	}
-
 	public function onSongLoading() {
-		countdownComplete = true;
+		updateConductor = true;
 
 		var countdownBeathit:Int->Void = null;
 
@@ -189,7 +210,7 @@ class PlayState extends MusicBeatState {
 						scriptCall('countdownTick', [1]);
 					case -5:
 						countdown.display('ready regular');
-						FlxG.sound.play('assets/ui/confirmMenu${Constants.EXT_AUDIO}');
+						FlxG.sound.play(Constants.SFX_CONFIRMMENU);
 						scriptCall('countdownTick', [0]);
 				}
 

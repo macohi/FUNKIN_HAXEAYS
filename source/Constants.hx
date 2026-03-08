@@ -27,4 +27,8 @@ class Constants {
 	}
 
 	public static final SONG_EVENT_TIME_WIGGLEROOM_MS:Float = 20;
+
+	public static final SFX_CANCELMENU:String = 'assets/ui/cancelMenu${EXT_AUDIO}';
+	public static final SFX_CONFIRMMENU:String = 'assets/ui/confirmMenu${EXT_AUDIO}';
+	public static final SFX_SCROLLMENU:String = 'assets/ui/scrollMenu${EXT_AUDIO}';
 }
