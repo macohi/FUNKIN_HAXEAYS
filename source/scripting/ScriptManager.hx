@@ -93,10 +93,13 @@ class ScriptManager {
 				scripts.push(baseScript);
 			}
 		} catch (e) {
+
 			trace(' * Error reading script folder : $e');
 			scripts = [];
 		}
 
 		return scripts;
 	}
+
+	public static var generalScriptHolder:ScriptHolder;
 }

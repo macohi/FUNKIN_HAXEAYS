@@ -1,3 +1,6 @@
+import objects.ScriptHolder;
+import scripting.GeneralScript;
+import scripting.ScriptManager;
 import crowplexus.iris.Iris;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -13,14 +16,18 @@ class InitState extends FlxState {
 
 		FlxG.signals.postUpdate.add(function() {
 			if (FlxG.keys.justReleased.F3) {
-				if (PlayState.instance != null)
-				{
+				if (PlayState.instance != null) {
 					for (audio in PlayState.instance.audioFiles)
 						audio.destroy();
 				}
 
 				FlxG.resetGame();
 			}
+		});
+
+		ScriptManager.generalScriptHolder = new ScriptHolder();
+		ScriptManager.generalScriptHolder.scriptFiles = ScriptManager.readScriptFolder('assets/scripts/', function(s) {
+			return new GeneralScript(s);
 		});
 
 		FlxG.switchState(() -> new PlayState());
