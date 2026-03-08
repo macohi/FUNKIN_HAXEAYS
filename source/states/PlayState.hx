@@ -183,6 +183,9 @@ class PlayState extends MusicBeatState {
 
 	public function endSong() {
 		scriptCall('onSongEnd');
+
+		song.pauseAudio();
+
 		FlxG.switchState(() -> new SongSelectState());
 	}
 
