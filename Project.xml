@@ -29,7 +29,7 @@
 
 	<app title="FUNKIN_HAXEAYS" file="FUNKIN_HAXEAYS"/>
 	<app company="Macohi" />
-	<app version="0.0.1"/>
+	<app version="0.1.0"/>
 	<app main="Main" />
 
 	<app preloader="flixel.system.FlxPreloader" />
