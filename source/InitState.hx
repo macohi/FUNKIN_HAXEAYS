@@ -12,11 +12,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 
 class InitState extends FlxState {
-	override function create() {
-		super.create();
-
-		FlxSprite.defaultAntialiasing = true;
-
+	public function instanceInitalization() {
 		ModCore.instance = new ModCore();
 		ModCore.instance.init();
 
@@ -25,7 +21,9 @@ class InitState extends FlxState {
 		SongRegistry.instance = new SongRegistry();
 		CharacterRegistry.instance = new CharacterRegistry();
 		StageRegistry.instance = new StageRegistry();
+	}
 
+	public function generalScriptInitalization() {
 		ScriptManager.generalScriptHolder = new ScriptHolder();
 		ScriptManager.generalScriptHolder.scriptFiles = ScriptManager.readScriptFolder('assets/scripts', function(s) {
 			return new GeneralScript(s);
@@ -39,15 +37,29 @@ class InitState extends FlxState {
 			for (script in modScriptFiles)
 				ScriptManager.generalScriptHolder.scriptFiles.push(script);
 		}
+	}
+
+	override function create() {
+		super.create();
+
+		FlxSprite.defaultAntialiasing = true;
+
+		instanceInitalization();
+
+		generalScriptInitalization();
 
 		FlxG.signals.postUpdate.add(function() {
 			if (FlxG.keys.justReleased.F3) {
-				if (PlayState.instance != null) {
-					for (audio in PlayState.instance.audioFiles)
-						audio.destroy();
-				}
-
+				if (PlayState.instance != null)
+					PlayState.instance.song.pauseAudio();
 				FlxG.resetGame();
+			}
+
+			if (FlxG.keys.justReleased.F5) {
+				instanceInitalization();
+				generalScriptInitalization();
+				
+				FlxG.resetState();
 			}
 		});
 
