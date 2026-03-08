@@ -1,4 +1,5 @@
 # 0.2.0 - (3/8/2026)
+- fix: Pause Screen BG fits the screen when the game camera is zoomed out
 - fix: VSlice FocusCamera camera tweens cancel previous ones when active (this applies to ZoomCamera too)
 
 - feat: `zoom` stage field

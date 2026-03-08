@@ -37,6 +37,7 @@ class PauseSubState extends MusicBeatSubState {
 		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.0;
 		add(bg);
+		bg.cameras = [PlayState.instance.camHUD];
 		bg.scrollFactor.set();
 
 		FlxTween.tween(bg, {alpha: 0.6}, conductor.quaver / Constants.MS_PER_SEC, {ease: FlxEase.sineInOut});
@@ -71,18 +72,17 @@ class PauseSubState extends MusicBeatSubState {
 		pauseCam.follow(camFollow, LOCKON, 0.4);
 		pauseCam.focusOn(camFollow.getPosition());
 
-		
-
 		var watermark:FlxText = new FlxText(0, 10, FlxG.width, '', 32);
 		add(watermark);
 		watermark.scrollFactor.set();
 		watermark.alignment = RIGHT;
 		watermark.alpha = 0;
+		watermark.cameras = [pauseCam];
 
 		watermark.text = 'Song: ${PlayState.instance.song.name}\n';
 		watermark.text += 'Artist: ${PlayState.instance.song.artist}\n';
 
-			FlxTween.tween(watermark, {alpha: 1}, 0.6, {ease: FlxEase.sineInOut});
+		FlxTween.tween(watermark, {alpha: 1}, 0.6, {ease: FlxEase.sineInOut});
 	}
 
 	override function update(elapsed:Float) {
