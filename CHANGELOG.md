@@ -1,4 +1,5 @@
 # 0.3.0 - (3/8/2026)
+- fix: Supported Mod versions are now 0.3+ versions and any before are now labelled as outdated
 - feat: `addProp` stage script function
 
 - chore: spaghetti was in the works but got scrapped

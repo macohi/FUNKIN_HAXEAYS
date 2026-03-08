@@ -10,7 +10,7 @@ class ModCore {
 
 	public static var instance:ModCore = null;
 
-	public var MOD_MIN_API_VERSION:Float = 0.1;
+	public var MOD_MIN_API_VERSION:Float = 0.3;
 
 	public var MOD_DIRECTORY:String = 'mods';
 	public var MOD_METADATA_FILE:String = 'meta.json';
