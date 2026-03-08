@@ -210,22 +210,13 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 			var charData:StageCharacterInfoData = Reflect.field(metadata.characters, char);
 
-			if (charData.position != null) {
-				playStateChar.x = charData.position[0] ?? 0;
-				playStateChar.y = charData.position[1] ?? 0;
+			applyConstPropValues(cast charData, playStateChar);
+
+			if (charData.cameraOffsets != null)
+			{
+				playStateChar.cameraOffsets[0] += charData.cameraOffsets[0] ?? 0;
+				playStateChar.cameraOffsets[1] += charData.cameraOffsets[1] ?? 0;
 			}
-			if (charData.scale != null) {
-				playStateChar.scale.x = charData.scale[0] ?? 0;
-				playStateChar.scale.y = charData.scale[1] ?? 0;
-			}
-			if (charData.scroll != null) {
-				playStateChar.scrollFactor.x = charData.scroll[0] ?? 0;
-				playStateChar.scrollFactor.y = charData.scroll[1] ?? 0;
-			}
-			if (charData.zIndex != null)
-				playStateChar.zIndex = charData.zIndex;
-			if (charData.alpha != null)
-				playStateChar.alpha = charData.alpha;
 		}
 	}
 

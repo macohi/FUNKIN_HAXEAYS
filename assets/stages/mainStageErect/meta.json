@@ -4,12 +4,20 @@
             "position": [
                 900,
                 400
+            ],
+            "cameraOffsets": [
+                0,
+                25
             ]
         },
         "opponent": {
             "position": [
                 40,
                 380
+            ],
+            "cameraOffsets": [
+                0,
+                75
             ]
         },
         "damsel": {

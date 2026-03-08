@@ -1,4 +1,5 @@
 # 0.2.0 - (3/8/2026)
+- feat: `cameraOffsets` stage character info field
 - feat: mainStageErect BG
     - feat: `player`, `damsel`, and `opponent` stage script variables
     - feat: `getNamedProp` stage script function
