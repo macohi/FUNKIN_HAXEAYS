@@ -1,16 +1,26 @@
 # 0.3.0 - (3/8/2026)
-- fix: Supported Mod versions are now 0.3+ versions and any before are now labelled as outdated
-- feat: `addProp` stage script function
 
-- chore: spaghetti was in the works but got scrapped
-    - fix: `CountdownSprite` is now imported in scripts
-    - feat: `PerspectiveSprite` (I don't think it really works tho...)
-    - fix: At the start of the song the camera points at the middle of the opponent
-    - chore: Split `loadVSliceChart` into `parseVSliceChart` and `loadVSliceChart`
-        - `parseVSliceChart` gives the VSlice chart note and event data
-        - `loadVSliceChart` uses `parseVSliceChart` and makes the events according to the data its given
-    - feat: SserafimShader
-    - refactor: `dadbattle` is now hardcoded into the base songList to be after fresh and never to be after new songs
+## feats
+
+- feat: `addProp` stage script function
+- feat(spaghetti): `PerspectiveSprite` (I don't think it really works tho...)
+- feat(spaghetti): SserafimShader
+
+## fixes
+
+- fix: Supported Mod versions are now 0.3+ versions and any before are now labelled as outdated
+- fix(spaghetti): `CountdownSprite` is now imported in scripts
+- fix(spaghetti): At the start of the song the camera points at the middle of the opponent
+
+## chores
+
+- chore(chagnelog): New changelog format
+- chore(spaghetti): Split `loadVSliceChart` into `parseVSliceChart` and `loadVSliceChart`
+    - `parseVSliceChart` gives the VSlice chart note and event data
+    - `loadVSliceChart` uses `parseVSliceChart` and makes the events according to the data its given
+
+## refactors
+- refactor: `dadbattle` is now hardcoded into the base songList to be after fresh and never to be after new songs
 
 # 0.2.0 - (3/8/2026)
 - fix: Pause Screen BG fits the screen when the game camera is zoomed out

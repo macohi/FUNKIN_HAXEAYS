@@ -12,4 +12,7 @@
 		}
 	],
 	"lime.defaultTargetConfiguration": "Windows / Indev",
+	"conventionalCommits.scopes": [
+		"changelog"
+	],
 }
