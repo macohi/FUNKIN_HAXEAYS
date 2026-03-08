@@ -49,7 +49,7 @@ typedef VSliceChart = {
 	// version:String,
 	// scrollSpeed:Map<String, Float>,
 	events:Array<VSliceChartEvent>,
-	notes:Map<String, Array<VSliceChartNote>>,
+	notes:Dynamic, // Map<String, Array<VSliceChartNote>>,
 	// generatedBy:String
 }
 

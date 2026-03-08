@@ -90,7 +90,8 @@ class Stage extends FlxTypedContainer<FlxBasic> {
 
 	public function loadProps() {
 		trace('Loading props for stage: ${this.id}');
-		for (prop in metadata.props) {
+
+		for (prop in metadata?.props ?? []) {
 			if (prop == null)
 				continue;
 			if (prop.assetType == null)

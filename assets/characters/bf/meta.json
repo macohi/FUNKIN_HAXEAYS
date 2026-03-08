@@ -10,22 +10,38 @@
         {
             "name": "singLEFT",
             "type": "prefix",
-            "prefix": "bf anim left"
+            "prefix": "bf anim left",
+            "offsets": [
+                0,
+                0
+            ]
         },
         {
             "name": "singDOWN",
             "type": "prefix",
-            "prefix": "bf anim down"
+            "prefix": "bf anim down",
+            "offsets": [
+                40,
+                -50
+            ]
         },
         {
             "name": "singUP",
             "type": "prefix",
-            "prefix": "bf anim up"
+            "prefix": "bf anim up",
+            "offsets": [
+                -30,
+                12
+            ]
         },
         {
             "name": "singRIGHT",
             "type": "prefix",
-            "prefix": "bf anim right"
+            "prefix": "bf anim right",
+            "offsets": [
+                10,
+                13
+            ]
         }
     ]
 }

@@ -1,12 +1,10 @@
 {
     "type": "sparrow",
     "imageName": "atlas",
-
     "generalOffsets": [
         0,
         80
     ],
-
     "animations": [
         {
             "name": "idle",
@@ -16,22 +14,38 @@
         {
             "name": "singLEFT",
             "type": "prefix",
-            "prefix": "daddy anim left"
+            "prefix": "daddy anim left",
+            "offsets": [
+                20,
+                -5
+            ]
         },
         {
             "name": "singDOWN",
             "type": "prefix",
-            "prefix": "daddy anim down"
+            "prefix": "daddy anim down",
+            "offsets": [
+                25,
+                -110
+            ]
         },
         {
             "name": "singUP",
             "type": "prefix",
-            "prefix": "daddy anim up"
+            "prefix": "daddy anim up",
+            "offsets": [
+                38,
+                0
+            ]
         },
         {
             "name": "singRIGHT",
             "type": "prefix",
-            "prefix": "daddy anim right"
+            "prefix": "daddy anim right",
+            "offsets": [
+                -22,
+                -6
+            ]
         }
     ]
 }

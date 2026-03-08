@@ -1,0 +1,26 @@
+function onSongLoaded()
+{
+    var dad:Character = null;
+    var bf:Character = null;
+    
+    bf = new Character(PlayState.instance.stage.player.id);
+    bf.zIndex = PlayState.instance.stage.player.zIndex - 10;
+
+    dad = new Character(PlayState.instance.stage.opponent.id);
+    dad.zIndex = PlayState.instance.stage.opponent.zIndex - 10;
+
+    dad.alpha = 0.5;
+    bf.alpha = 0.5;
+
+    bf.x = PlayState.instance.stage.player.x;
+    bf.y = PlayState.instance.stage.player.y;
+
+    dad.x = PlayState.instance.stage.opponent.x;
+    dad.y = PlayState.instance.stage.opponent.y;
+
+    PlayState.instance.add(bf);
+    PlayState.instance.add(dad);
+
+    PlayState.instance.refresh();
+
+}
