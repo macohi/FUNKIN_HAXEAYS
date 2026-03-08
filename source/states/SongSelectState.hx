@@ -74,6 +74,7 @@ class SongSelectState extends MusicBeatState {
 		}
 
 		if (FlxG.keys.anyJustReleased([ENTER])) {
+			FlxG.sound.play(Constants.SFX_CONFIRMMENU);
 			FlxG.switchState(() -> new PlayState(songsList[curSelect]));
 		}
 
