@@ -48,21 +48,24 @@ class InitState extends FlxState {
 
 		generalScriptInitalization();
 
-		FlxG.signals.postUpdate.add(function() {
-			if (FlxG.keys.justReleased.F3) {
-				if (PlayState.instance != null)
-					PlayState.instance.song.pauseAudio();
-				FlxG.resetGame();
-			}
-
-			if (FlxG.keys.justReleased.F5) {
-				instanceInitalization();
-				generalScriptInitalization();
-				
-				FlxG.resetState();
-			}
-		});
+		if (!FlxG.signals.postUpdate.has(fKeys))
+			FlxG.signals.postUpdate.add(fKeys);
 
 		FlxG.switchState(() -> new states.SongSelectState());
+	}
+
+	public function fKeys() {
+		if (FlxG.keys.justReleased.F3) {
+			if (PlayState.instance != null)
+				PlayState.instance.song.pauseAudio();
+			FlxG.resetGame();
+		}
+
+		if (FlxG.keys.justReleased.F5) {
+			instanceInitalization();
+			generalScriptInitalization();
+
+			FlxG.resetState();
+		}
 	}
 }
