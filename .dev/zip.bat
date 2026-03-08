@@ -1,7 +1,6 @@
 @echo off
 
 @REM I am expecting to run it like this: ".\.dev/zip.bat"
-cd ..
 
 set /P directory="Enter directory (example: debug/hl): "
 set /P suffix="Enter file suffix (example: windows-0.3.0): "
