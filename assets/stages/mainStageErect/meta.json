@@ -70,7 +70,7 @@
             "animations": [
                 {
                     "name": "idle",
-                    "type": "type",
+                    "type": "prefix",
                     "prefix": "idle0",
                     "fps": 12,
                     "looped": true
