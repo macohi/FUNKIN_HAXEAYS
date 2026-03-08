@@ -1,5 +1,6 @@
 package objects;
 
+import flixel.FlxG;
 import modding.ModCore;
 import registries.SongRegistry;
 import scripting.ScriptManager;
@@ -43,6 +44,7 @@ class Song extends ScriptHolder {
 				var a:FlxSound = new FlxSound().loadEmbedded(getPath('audio/' + audioFile + Constants.EXT_AUDIO));
 				trace(' * $audioFile');
 				audioFiles.push(a);
+				FlxG.sound.list.add(a);
 			}
 		}
 

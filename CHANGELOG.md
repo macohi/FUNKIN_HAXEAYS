@@ -1,4 +1,5 @@
 # 0.1.1 - (3/8/2026)
+- fix: song audio files now are linked once again to the soundtray volume
 - fix: `bf` and `dad` have the correct camera offsets again
 - fix: Mod song scripts are found once again
 
