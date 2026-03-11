@@ -1,6 +1,6 @@
-# 0.3.0 - (3/8/2026)
+# 0.3.0 - (3/11/2026)
 
-(Spaghetti isn't coming soon, I was working on it but thats ALOT.)
+(Spaghetti and that's a wrap isn't coming soon, I was working on both but thats alot and my fucking perfectionistic head is an asshole.)
 
 ## revert
 
