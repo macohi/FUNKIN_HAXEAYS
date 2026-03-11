@@ -11,7 +11,6 @@
 - feat(thats-a-wrap): `SongCharacterAnimationEvent(time, animation, character)` general script function
 - feat(thats-a-wrap): Note kind Support via scripts (`ChartNoteEventKind(kind, character)` function)
     - Includes VSlice `note.k` field support
-- feat(thats-a-wrap): [THAT'S A WRAP](https://www.youtube.com/watch?v=VHhPVi9xSqg) FROM [FLAVOR RAVE](https://gamebanana.com/mods/410436) BY [RIXFX](https://www.youtube.com/@rixfx_)
 - feat(thats-a-wrap): VSlice BPM Changes Support
 - feat(thats-a-wrap): New song event object: `SongBPMChangeEvent`
 - feat(thats-a-wrap): Psych Engine Chart Support
