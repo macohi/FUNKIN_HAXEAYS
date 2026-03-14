@@ -1,5 +1,9 @@
 # 0.4 - (3/14/2026)
 
+## a-pimp-named-slickback
+
+## no-scope
+
 - 0.3.0 changelog is fixed in compiled builds
 
 # 0.3.0 - (3/11/2026)
