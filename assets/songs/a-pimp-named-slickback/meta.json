@@ -1,0 +1,16 @@
+{
+    "name": "A Pimp Named Slickback",
+    "artist": "Lakim",
+    
+    "startingBPM": 70,
+    
+    "songFiles": [
+        "Song"
+    ],
+
+    "player": "grampa",
+    "damsel": null,
+    "opponent": "pimp",
+    
+    "stage": "whiteVoid"
+}

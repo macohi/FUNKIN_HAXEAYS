@@ -1,0 +1,9 @@
+function onSongLoaded()
+{
+    PlayState.instance.camFollow.setPosition(
+    	PlayState.instance.stage.player.getGraphicMidpoint().x + PlayState.instance.stage.player.cameraOffsets[0],
+    	PlayState.instance.stage.player.getGraphicMidpoint().y + PlayState.instance.stage.player.cameraOffsets[1]
+    );
+    PlayState.instance.camFollow.x += FlxG.width / 3.25;
+	PlayState.instance.camGame.focusOn(PlayState.instance.camFollow.getPosition());
+}

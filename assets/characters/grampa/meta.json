@@ -1,0 +1,31 @@
+{
+    "type": "textureatlas",
+    "imageName": "atlas",
+    "animations": [
+        {
+            "name": "idle",
+            "type": "framelabel",
+            "framelabel": "idle"
+        },
+        {
+            "name": "singLEFT",
+            "type": "framelabel",
+            "framelabel": "left"
+        },
+        {
+            "name": "singDOWN",
+            "type": "framelabel",
+            "framelabel": "down"
+        },
+        {
+            "name": "singUP",
+            "type": "framelabel",
+            "framelabel": "up"
+        },
+        {
+            "name": "singRIGHT",
+            "type": "framelabel",
+            "framelabel": "right"
+        }
+    ]
+}

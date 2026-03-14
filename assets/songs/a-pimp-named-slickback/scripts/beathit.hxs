@@ -1,0 +1,10 @@
+function beatHit(beat:Int)
+{
+    if (beat > -1)
+        PlayState.instance.cameraZoom = 0.7;
+}
+
+function onUpdate(elapsed:Float)
+{
+    PlayState.instance.cameraZoom = FlxMath.lerp(PlayState.instance.cameraZoom, 0.6, 0.04);
+}

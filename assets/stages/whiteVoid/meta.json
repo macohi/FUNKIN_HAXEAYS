@@ -1,0 +1,37 @@
+{
+    "zoom": 0.6,
+    "characters": {
+        "player": {
+            "position": [
+                0,
+                0
+            ]
+        },
+        "opponent": {
+            "position": [
+                800,
+                0
+            ]
+        }
+    },
+    "props": [
+        {
+            "id": "void",
+            "zIndex": 0,
+            "assetType": "solid",
+            "color": "#FFFFFF",
+            "position": [
+                600,
+                600
+            ],
+            "scale": [
+                2400,
+                2000
+            ],
+            "scroll": [
+                0,
+                0
+            ]
+        }
+    ]
+}
