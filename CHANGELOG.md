@@ -2,6 +2,12 @@
 
 ## a-pimp-named-slickback
 
+- Stage scripts now receive the same function calls as song and character scripts.
+- Added new script functions:
+    - `refresh()`
+    - `checkSongTime(conductorTime)`
+    - `onUpdate(elapsed)`
+
 ## no-scope
 
 - 0.3.0 changelog is fixed in compiled builds

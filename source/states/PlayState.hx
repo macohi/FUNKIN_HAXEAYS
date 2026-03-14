@@ -143,6 +143,8 @@ class PlayState extends MusicBeatState {
 			endSong();
 
 		camGame.zoom = cameraZoom;
+
+		scriptCall('onUpdate', [elapsed]);
 	}
 
 	public var focusLostPause:Bool = false;
@@ -263,6 +265,8 @@ class PlayState extends MusicBeatState {
 			endSong();
 			return;
 		}
+
+		scriptCall('checkSongTime', [conductor.time]);
 	}
 
 	public function addEvent(time:Float, event:Void->Void)
@@ -293,6 +297,8 @@ class PlayState extends MusicBeatState {
 		super.refresh();
 
 		stage.refresh();
+
+		scriptCall('refresh');
 	}
 
 	public function scriptCall(m:String, ?a:Array<Dynamic>) {
@@ -301,6 +307,8 @@ class PlayState extends MusicBeatState {
 		stage?.player?.scriptCall(m, a);
 		stage?.damsel?.scriptCall(m, a);
 		stage?.opponent?.scriptCall(m, a);
+
+		stage.scriptCall(m, a);
 	}
 
 	override function beatHit(beat:Int) {
