@@ -1,7 +1,7 @@
 function beatHit(beat:Int)
 {
     if (beat > -1)
-        PlayState.instance.cameraZoom = 0.7;
+        PlayState.instance.cameraZoom = 0.625;
 }
 
 function onUpdate(elapsed:Float)
