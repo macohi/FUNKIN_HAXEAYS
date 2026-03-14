@@ -1,3 +1,7 @@
+# 0.4 - (3/14/2026)
+
+- 0.3.0 changelog is fixed in compiled builds
+
 # 0.3.0 - (3/11/2026)
 
 (Spaghetti and that's a wrap isn't coming soon, I was working on both but thats alot and my fucking perfectionistic head is an asshole.)

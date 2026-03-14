@@ -18,8 +18,9 @@
 		"vscode",
 		"misc",
 
-		"spaghetti",
-		"thats-a-wrap",
+		// "spaghetti",
+		// "thats-a-wrap",
+		"a-pimp-named-slickback",
 
 		"modmenu",
 	],
